@@ -1,1 +1,1 @@
-# Otel-Component-Generatot
+# Otel-Component-Generator
