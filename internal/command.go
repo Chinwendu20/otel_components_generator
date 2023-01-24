@@ -1,7 +1,8 @@
-package Otel_Component_Generator
+package internal
 
 import (
 	"fmt"
+	"github.com/Chinwendu20/otel_components_generator"
 	"github.com/spf13/cobra"
 )
 
@@ -23,8 +24,9 @@ options supplied by the commandline options. If no options are supplied
 ocg requests for these interactively.
 `,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			checkConfigOptions()
-			return generateComponent()
+			checkEmptyConfigOptions()
+			return
+			otel_components_generator.GenerateComponent(Config)
 		},
 	}
 

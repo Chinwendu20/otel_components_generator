@@ -1,5 +1,12 @@
-package Otel_Component_Generator
+package otel_components_generator
 
-func generateComponent() error {
-	return nil
+import (
+	"github.com/Chinwendu20/otel_components_generator/internal"
+	"github.com/spf13/cobra"
+)
+
+func main() {
+	cmd, err := internal.Command()
+	cobra.CheckErr(err)
+	cobra.CheckErr(cmd.Execute())
 }

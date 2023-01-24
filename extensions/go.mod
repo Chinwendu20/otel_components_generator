@@ -1,3 +1,3 @@
-module github.com/Chinwendu20/Otel-Component-Generator/extensions
+module github.com/Chinwendu20/otel_components_generator/extensions
 
 go 1.19
