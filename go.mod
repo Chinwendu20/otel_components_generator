@@ -3,13 +3,13 @@ module github.com/Chinwendu20/otel_components_generator
 go 1.19
 
 replace (
+	github.com/Chinwendu20/otel_components_generator/config => ./config
 	github.com/Chinwendu20/otel_components_generator/exporters => ./exporters
-	github.com/Chinwendu20/otel_components_generator/internal => ./internal
 )
 
 require (
+	github.com/Chinwendu20/otel_components_generator/config v0.0.0-00010101000000-000000000000
 	github.com/Chinwendu20/otel_components_generator/exporters v0.0.0-00010101000000-000000000000
-	github.com/Chinwendu20/otel_components_generator/internal v0.0.0-00010101000000-000000000000
 	github.com/spf13/cobra v1.6.1
 	go.uber.org/zap v1.24.0
 )

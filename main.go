@@ -1,12 +1,11 @@
-package otel_components_generator
+package main
 
 import (
-	"github.com/Chinwendu20/otel_components_generator/internal"
 	"github.com/spf13/cobra"
 )
 
 func main() {
-	cmd, err := internal.Command()
+	cmd, err := command()
 	cobra.CheckErr(err)
 	cobra.CheckErr(cmd.Execute())
 }

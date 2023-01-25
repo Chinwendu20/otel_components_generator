@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Otel-Component-Generator.iml" filepath="$PROJECT_DIR$/.idea/Otel-Component-Generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/otel_components_generator.iml" filepath="$PROJECT_DIR$/.idea/otel_components_generator.iml" />
     </modules>
   </component>
 </project>

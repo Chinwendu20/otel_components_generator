@@ -1,13 +1,13 @@
 package exporters
 
 import (
-	"github.com/Chinwendu20/otel_components_generator/internal"
+	"github.com/Chinwendu20/otel_components_generator/config"
 	"go.uber.org/zap"
 	"text/template"
 )
 
-func GenerateExporter(cfg internal.ConfigStruct) []*template.Template {
-	for _, signal := range internal.Config.Signals {
+func GenerateExporter(cfg config.ConfigStruct) []*template.Template {
+	for _, signal := range cfg.Signals {
 
 		if signal == "metric" {
 			templateSlice = append(templateSlice, metricTemplate)
@@ -20,7 +20,7 @@ func GenerateExporter(cfg internal.ConfigStruct) []*template.Template {
 		}
 	}
 
-	internal.Config.Logger.Info("Exporter templates generated", zap.String("exporter", internal.Config.Module))
+	cfg.Logger.Info("Exporter templates generated", zap.String("exporter", cfg.Module))
 
 	return templateSlice
 }
