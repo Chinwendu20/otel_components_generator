@@ -1,4 +1,4 @@
-package exporters
+package receivers
 
 import (
 	_ "embed"

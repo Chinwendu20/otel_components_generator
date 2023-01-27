@@ -17,18 +17,6 @@ var (
 	//go:embed templates/go.mod.tmpl
 	goModBytes    []byte
 	goModTemplate = parseTemplate("go.mod", goModBytes)
-
-	//go:embed templates/log.go.tmpl
-	logBytes    []byte
-	logTemplate = parseTemplate("log.go", logBytes)
-
-	//go:embed templates/metric.go.tmpl
-	metricBytes    []byte
-	metricTemplate = parseTemplate("metric.go", metricBytes)
-
-	//go:embed templates/trace.go.tmpl
-	traceBytes    []byte
-	traceTemplate = parseTemplate("trace.go", traceBytes)
 )
 
 func parseTemplate(name string, bytes []byte) *template.Template {

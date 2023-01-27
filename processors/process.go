@@ -1,4 +1,4 @@
-package exporters
+package processors
 
 import (
 	"github.com/Chinwendu20/otel_components_generator/config"
@@ -6,7 +6,7 @@ import (
 	"text/template"
 )
 
-func GenerateExporter(cfg config.ConfigStruct) []*template.Template {
+func GenerateProcessor(cfg config.ConfigStruct) []*template.Template {
 	for _, signal := range cfg.SetSignals() {
 
 		if signal == "metric" {
@@ -20,7 +20,7 @@ func GenerateExporter(cfg config.ConfigStruct) []*template.Template {
 		}
 	}
 
-	cfg.Logger.Info("Exporter templates generated", zap.String("exporter", cfg.Module))
+	cfg.Logger.Info("Processor templates generated", zap.String("exporter", cfg.Module))
 
 	return templateSlice
 }

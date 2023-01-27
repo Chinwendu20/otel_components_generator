@@ -1,4 +1,4 @@
-package exporters
+package processors
 
 import (
 	_ "embed"

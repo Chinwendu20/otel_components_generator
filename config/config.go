@@ -1,81 +1,27 @@
 package config
 
 import (
-	"errors"
 	"fmt"
 	"go.uber.org/zap"
 	"strings"
 )
 
-const DefaultOtelColVersion = "0.69.1"
+const (
+	DefaultOtelColVersion = "0.69.1"
+)
 
-type SignalSlice []string
-
-var validSignals = SignalSlice{"metric", "trace", "log"}
-
-func (sigs *SignalSlice) String() string {
-
-	return fmt.Sprint(*sigs)
-}
-
-func (sigs *SignalSlice) Set(value string) error {
-	if len(*sigs) > 0 {
-		return errors.New("interval flag already set")
-	}
-	for _, signal := range strings.Split(value, ",") {
-
-		*sigs = append(*sigs, signal)
-	}
-	for _, sig := range *sigs {
-		valid := false
-		for _, signal := range validSignals {
-			if sig == signal {
-				valid = true
-				break
-
-			}
-		}
-		if !valid {
-
-			return errors.New(fmt.Sprintf("invalid signal.Accepted values are: %v", validSignals))
-
-		}
-
-	}
-	return nil
-}
-
-type ComponentString string
-
-var validComponents = []ComponentString{"exporter", "receiver", "processor", "extension"}
-
-func (compt *ComponentString) String() string {
-	return fmt.Sprint(*compt)
-}
-
-func (compt *ComponentString) Set(s string) error {
-
-	if len(*compt) > 0 {
-		return errors.New("component flag already set")
-	}
-
-	for _, component := range validComponents {
-
-		if component == *compt {
-			return nil
-		}
-	}
-	return errors.New(fmt.Sprintf("invalid component. Accepted values are: %v", validComponents))
-
-}
+var (
+	validSignals    = []string{"metric", "trace", "log"}
+	validComponents = []string{"exporter", "receiver", "processor", "extension"}
+)
 
 type ConfigStruct struct {
 	Logger         *zap.Logger
 	SkipGetModules bool
-	Component      ComponentString
+	Component      string
 	Module         string
 	Output         string
-	Signals        SignalSlice
+	Signals        string
 	GoPath         string
 }
 
@@ -88,4 +34,43 @@ func NewConfig() ConfigStruct {
 	return ConfigStruct{
 		Logger: log,
 	}
+}
+
+func (cfg *ConfigStruct) ValidateSignal() error {
+	for _, sig := range cfg.SetSignals() {
+		valid := false
+		for _, signal := range validSignals {
+			if sig == signal {
+				valid = true
+				break
+
+			}
+		}
+		if !valid {
+
+			return fmt.Errorf("invalid input for signals flag, accepted values are: %v", validSignals)
+
+		}
+
+	}
+	return nil
+}
+
+func (cfg *ConfigStruct) ValidateComponent() error {
+	fmt.Println(cfg.Component)
+
+	for _, component := range validComponents {
+
+		if component == cfg.Component {
+			return nil
+		}
+	}
+	return fmt.Errorf("invalid input for component flag, accepted values are: %v", validComponents)
+
+}
+
+func (cfg *ConfigStruct) SetSignals() []string {
+
+	return strings.Split(cfg.Signals, ",")
+
 }

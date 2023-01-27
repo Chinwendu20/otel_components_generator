@@ -51,14 +51,14 @@ func processAndWrite(cfg config.ConfigStruct, tmpl *template.Template, outFile s
 
 func GetModules(cfg config.ConfigStruct) error {
 	if cfg.SkipGetModules {
-		cfg.Logger.Info("Generating source codes only, will not update go.mod and retrieve Go modules.")
+		cfg.Logger.Info("Generating source codes only, will not update go.mod.tmpl.tmpl and retrieve Go modules.")
 		return nil
 	}
 
-	cmd := exec.Command(cfg.GoPath, "mod", "tidy", "-compat=1.18")
+	cmd := exec.Command(cfg.GoPath, "mod", "tidy")
 	cmd.Dir = cfg.Output
 	if out, err := cmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("failed to update go.mod: %w. Output:\n%s", err, out)
+		return fmt.Errorf("failed to update go.mod.tmpl.tmpl: %w. Output:\n%s", err, out)
 	}
 
 	cfg.Logger.Info("Getting go modules")
@@ -121,4 +121,26 @@ func generateComponent(cfg config.ConfigStruct) error {
 	}
 	return nil
 
+}
+
+func validateComponent(cfg config.ConfigStruct) error {
+
+	sigErr := cfg.ValidateSignal()
+	compErr := cfg.ValidateComponent()
+
+	if sigErr == nil && compErr == nil {
+
+		return nil
+
+	}
+	if sigErr == nil {
+
+		return compErr
+	}
+	if compErr == nil {
+
+		return sigErr
+	}
+
+	return fmt.Errorf("--%w\n--%w", sigErr, compErr)
 }

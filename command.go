@@ -24,6 +24,10 @@ ocg requests for these interactively.
 `,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			checkEmptyConfigOptions()
+			if err := validateComponent(Config); err != nil {
+
+				return err
+			}
 			return generateComponent(Config)
 		},
 	}
