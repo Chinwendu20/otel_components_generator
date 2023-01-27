@@ -15,11 +15,7 @@ const (
 )
 
 var (
-	Config    = config.NewConfig()
-	component = &Config.Component
-	module    = &Config.Module
-	output    = &Config.Output
-	signals   = &Config.Signals
+	Config = config.NewConfig()
 )
 
 func flags() *flag.FlagSet {
@@ -43,7 +39,7 @@ func checkEmptyConfigOptions() {
 	if Config.Output == "" {
 		obtainValueInteractively(outputDirectoryFlag, &Config.Output)
 	}
-	if len(Config.Signals) == 0 {
+	if len(Config.Signals) == 0 && Config.Component != "extension" {
 		obtainValueInteractively(signalsFlag, &Config.Signals)
 	}
 
