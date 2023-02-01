@@ -2,6 +2,7 @@ package exporters
 
 import (
 	_ "embed"
+	"strings"
 	"text/template"
 )
 
@@ -32,5 +33,9 @@ var (
 )
 
 func parseTemplate(name string, bytes []byte) *template.Template {
-	return template.Must(template.New(name).Parse(string(bytes)))
+	return template.Must(template.New(name).Funcs(template.FuncMap{
+		"SplitString": func(signal string) []string {
+			return strings.Split(signal, ",")
+		},
+	}).Parse(string(bytes)))
 }

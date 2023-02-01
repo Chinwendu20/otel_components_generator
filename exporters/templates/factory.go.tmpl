@@ -27,9 +27,17 @@ func NewFactory() exporter.Factory {
 		// component.StabilityLevelAlpha
 		// component.StabilityLevelBeta
 		// component.StabilityLevelStable
-		// exporter.WithMetrics(createMetricsExporter, component.StabilityLevelBeta),
-		// exporter.WithTraces(createTracesExporter, component.StabilityLevelBeta),
-		// exporter.WithLogs(createLogsExporter, component.StabilityLevelAlpha),
+        {{- range SplitString .Signals}}
+        {{- if eq . "trace"}}
+        exporter.WithTraces(createTracesExporter, component.StabilityLevelBeta),
+        {{end}}
+        {{- if eq . "metric"}}
+        exporter.WithMetrics(createMetricsExporter, component.StabilityLevelBeta),
+        {{end}}
+        {{- if eq . "log"}}
+        exporter.WithLogs(createLogsExporter, component.StabilityLevelAlpha),
+        {{end}}
+        {{- end}}
 	)
 }
 
@@ -38,6 +46,9 @@ func createDefaultConfig() component.Config {
 	return &config{}
 }
 
+
+{{- range SplitString .Signals}}
+{{- if eq . "metric"}}
 // createMetricsExporter creates a metrics exporter based on this config.
 func createMetricsExporter(
 	ctx context.Context,
@@ -57,7 +68,8 @@ func createMetricsExporter(
 	)
 
 }
-
+{{- end}}
+{{- if eq . "trace"}}
 // createTracesExporter creates a trace exporter based on this config.
 func createTracesExporter(
 	ctx context.Context,
@@ -76,7 +88,8 @@ func createTracesExporter(
 		//exporterhelper.WithCapabilities(capabilities consumer.Capabilities)
 	)
 }
-
+{{- end}}
+{{- if eq . "log"}}
 func createLogsExporter(
 	ctx context.Context,
 	set exporter.CreateSettings,
@@ -95,3 +108,5 @@ func createLogsExporter(
 	)
 
 }
+{{- end}}
+{{- end}}

@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"github.com/Chinwendu20/otel_components_generator/config"
 	"github.com/Chinwendu20/otel_components_generator/exporters"
+	"github.com/Chinwendu20/otel_components_generator/extensions"
+	"github.com/Chinwendu20/otel_components_generator/processors"
+	"github.com/Chinwendu20/otel_components_generator/receivers"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -87,15 +90,15 @@ func obtainSourceCode(cfg config.ConfigStruct) error {
 	if cfg.Component == "exporter" {
 		templates = exporters.GenerateExporter(cfg)
 	}
-	//if cfg.component == "extension" {
-	//	templates := extensions.GenerateExtension()
-	//}
-	//if cfg.component == "processor" {
-	//	templates := processors.GenerateProcessor()
-	//}
-	//if cfg.component == "receiver" {
-	//	templates := receivers.GenerateReceiver()
-	//}
+	if cfg.Component == "extension" {
+		templates = extensions.GenerateExtension(cfg)
+	}
+	if cfg.Component == "processor" {
+		templates = processors.GenerateProcessor(cfg)
+	}
+	if cfg.Component == "receiver" {
+		templates = receivers.GenerateReceiver(cfg)
+	}
 	for _, tmpl := range templates {
 		if err := processAndWrite(cfg, tmpl, tmpl.Name(), cfg); err != nil {
 			return fmt.Errorf("failed to generate source file %q: %w", tmpl.Name(), err)

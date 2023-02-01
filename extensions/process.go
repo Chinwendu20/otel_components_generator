@@ -1,4 +1,4 @@
-package exporters
+package extensions
 
 import (
 	"github.com/Chinwendu20/otel_components_generator/config"
