@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	cmd, err := command()
+	cmd, err := command(Config)
 	cobra.CheckErr(err)
 	cobra.CheckErr(cmd.Execute())
 }

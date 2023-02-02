@@ -25,11 +25,13 @@ func flags() *flag.FlagSet {
 	flagSet.StringVar(&Config.Module, goModuleNameFlag, "", "The name of the GO module")
 	flagSet.StringVar(&Config.Output, outputDirectoryFlag, "", "The path to the directory for the generated source code")
 	flagSet.StringVar(&Config.Signals, signalsFlag, "", "This could be of value, metrics, traces or logs")
+	fmt.Printf("%v", Config)
 
 	return flagSet
 }
 
-func checkEmptyConfigOptions() {
+func checkEmptyConfigOptions(cfg config.ConfigStruct) {
+	fmt.Println(Config.Component)
 	if Config.Component == "" {
 		obtainValueInteractively(componentTypeFlag, &Config.Component)
 	}

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/Chinwendu20/otel_components_generator/config"
 	"github.com/spf13/cobra"
 )
 
@@ -10,7 +11,7 @@ var (
 )
 
 // Command is the main entrypoint for this application
-func command() (*cobra.Command, error) {
+func command(cfg config.ConfigStruct) (*cobra.Command, error) {
 	flagSet := flags()
 	cmd := &cobra.Command{
 		SilenceUsage:  true, // Don't print usage on Run error.
@@ -23,12 +24,12 @@ options supplied by the commandline options. If no options are supplied
 ocg requests for these interactively.
 `,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			checkEmptyConfigOptions()
+			checkEmptyConfigOptions(cfg)
 			if err := validateComponent(Config); err != nil {
 
 				return err
 			}
-			return generateComponent(Config)
+			return generateComponent(cfg)
 		},
 	}
 

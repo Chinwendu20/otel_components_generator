@@ -8,11 +8,18 @@ import (
 
 const (
 	DefaultOtelColVersion = "0.69.1"
+	ConfigFileName        = "config.go"
+	FactoryFileName       = "factory.go"
+	GoModFileName         = "go.mod"
+	LogFileName           = "log.go"
+	TraceFileName         = "trace.go"
+	MetricFileName        = "metric.go"
 )
 
 var (
-	validSignals    = []string{"metric", "trace", "log"}
-	validComponents = []string{"exporter", "receiver", "processor", "extension"}
+	validSignals      = []string{"metric", "trace", "log"}
+	validComponents   = []string{"exporter", "receiver", "processor", "extension"}
+	validateSignalErr = fmt.Errorf("invalid input for signals flag, accepted values are: %v", validSignals)
 )
 
 type ConfigStruct struct {
@@ -37,6 +44,7 @@ func NewConfig() ConfigStruct {
 }
 
 func (cfg *ConfigStruct) ValidateSignal() error {
+	fmt.Println(cfg.Signals)
 	for _, sig := range cfg.SetSignals() {
 		valid := false
 		for _, signal := range validSignals {
@@ -48,7 +56,7 @@ func (cfg *ConfigStruct) ValidateSignal() error {
 		}
 		if !valid {
 
-			return fmt.Errorf("invalid input for signals flag, accepted values are: %v", validSignals)
+			return validateSignalErr
 
 		}
 

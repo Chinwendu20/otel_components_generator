@@ -2,6 +2,7 @@ package exporters
 
 import (
 	_ "embed"
+	"github.com/Chinwendu20/otel_components_generator/config"
 	"strings"
 	"text/template"
 )
@@ -9,27 +10,27 @@ import (
 var (
 	//go:embed templates/config.go.tmpl
 	configBytes    []byte
-	configTemplate = parseTemplate("config.go", configBytes)
+	configTemplate = parseTemplate(config.ConfigFileName, configBytes)
 
 	//go:embed templates/factory.go.tmpl
 	factoryBytes    []byte
-	factoryTemplate = parseTemplate("factory.go", factoryBytes)
+	factoryTemplate = parseTemplate(config.FactoryFileName, factoryBytes)
 
 	//go:embed templates/go.mod.tmpl
 	goModBytes    []byte
-	goModTemplate = parseTemplate("go.mod", goModBytes)
+	goModTemplate = parseTemplate(config.GoModFileName, goModBytes)
 
 	//go:embed templates/log.go.tmpl
 	logBytes    []byte
-	logTemplate = parseTemplate("log.go", logBytes)
+	logTemplate = parseTemplate(config.LogFileName, logBytes)
 
 	//go:embed templates/metric.go.tmpl
 	metricBytes    []byte
-	metricTemplate = parseTemplate("metric.go", metricBytes)
+	metricTemplate = parseTemplate(config.MetricFileName, metricBytes)
 
 	//go:embed templates/trace.go.tmpl
 	traceBytes    []byte
-	traceTemplate = parseTemplate("trace.go", traceBytes)
+	traceTemplate = parseTemplate(config.TraceFileName, traceBytes)
 )
 
 func parseTemplate(name string, bytes []byte) *template.Template {

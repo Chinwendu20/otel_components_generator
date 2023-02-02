@@ -26,7 +26,7 @@ func ProcessOutputPath(cfg config.ConfigStruct) error {
 	} else if err != nil {
 		return fmt.Errorf(" %w", err)
 	}
-	cfg.Logger.Info("Output path created")
+	cfg.Logger.Info("Processed output path, created if missing")
 	return nil
 
 }
@@ -48,20 +48,21 @@ func processAndWrite(cfg config.ConfigStruct, tmpl *template.Template, outFile s
 	if err != nil {
 		return err
 	}
+	defer out.Close()
 
 	return tmpl.Execute(out, tmplParams)
 }
 
 func GetModules(cfg config.ConfigStruct) error {
 	if cfg.SkipGetModules {
-		cfg.Logger.Info("Generating source codes only, will not update go.mod.tmpl.tmpl and retrieve Go modules.")
+		cfg.Logger.Info("Generating source codes only, will not update go.mod and retrieve Go modules.")
 		return nil
 	}
 
 	cmd := exec.Command(cfg.GoPath, "mod", "tidy")
 	cmd.Dir = cfg.Output
 	if out, err := cmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("failed to update go.mod.tmpl.tmpl: %w. Output:\n%s", err, out)
+		return fmt.Errorf("failed to update go.mod: %w. Output:\n%s", err, out)
 	}
 
 	cfg.Logger.Info("Getting go modules")
@@ -70,7 +71,6 @@ func GetModules(cfg config.ConfigStruct) error {
 	retries := 3
 	failReason := "unknown"
 	for i := 1; i <= retries; i++ {
-		// #nosec G204
 		cmd := exec.Command(cfg.GoPath, "mod", "download")
 		cmd.Dir = cfg.Output
 		if out, err := cmd.CombinedOutput(); err != nil {
@@ -145,5 +145,5 @@ func validateComponent(cfg config.ConfigStruct) error {
 		return sigErr
 	}
 
-	return fmt.Errorf("--%w\n--%w", sigErr, compErr)
+	return fmt.Errorf("\n-- %w\n-- %v %s", sigErr, compErr, cfg.Signals)
 }

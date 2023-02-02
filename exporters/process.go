@@ -7,6 +7,12 @@ import (
 )
 
 func GenerateExporter(cfg config.ConfigStruct) []*template.Template {
+	templateSlice := []*template.Template{
+		configTemplate,
+		factoryTemplate,
+		goModTemplate,
+	}
+
 	for _, signal := range cfg.SetSignals() {
 
 		if signal == "metric" {
