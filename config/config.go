@@ -10,10 +10,15 @@ const (
 	DefaultOtelColVersion = "0.69.1"
 	ConfigFileName        = "config.go"
 	FactoryFileName       = "factory.go"
-	GoModFileName         = "go.mod"
+	GoModFileName         = "go.mod.tmpl"
 	LogFileName           = "log.go"
 	TraceFileName         = "trace.go"
 	MetricFileName        = "metric.go"
+	ConfigTestFileName    = "config_test.go"
+	FactoryTestFileName   = "factory_test.go"
+	LogTestFileName       = "log_test.go"
+	MetricTestFileName    = "metric_test.go"
+	TraceTestFileName     = "trace_test.go"
 )
 
 var (

@@ -26,9 +26,17 @@ func NewFactory() processor.Factory {
 		// component.StabilityLevelAlpha
 		// component.StabilityLevelBeta
 		// component.StabilityLevelStable
-		//processor.WithMetrics(createMetricsProcessor, component.StabilityLevelBeta),
-		// processor.WithTraces(createTracesProcessor, component.StabilityLevelBeta),
-		// processor.WithLogs(createLogsProcessor, component.StabilityLevelAlpha),
+        {{- range SplitString .Signals}}
+        {{- if eq . "trace"}}
+        processor.WithTraces(createTracesProcessor, component.StabilityLevelBeta),
+        {{end}}
+        {{- if eq . "metric"}}
+        processor.WithMetrics(createMetricsProcessor, component.StabilityLevelBeta),
+        {{end}}
+        {{- if eq . "log"}}
+        processor.WithLogs(createLogsProcessor, component.StabilityLevelAlpha),
+        {{end}}
+        {{- end}}
 	)
 }
 
@@ -37,6 +45,8 @@ func createDefaultConfig() component.Config {
 	return &config{}
 }
 
+{{- range SplitString .Signals}}
+{{- if eq . "metric"}}
 // createMetricsProcessor creates a metrics processor based on this config.
 func createMetricsProcessor(
 	ctx context.Context,
@@ -58,7 +68,8 @@ func createMetricsProcessor(
 	)
 
 }
-
+{{- end}}
+{{- if eq . "trace"}}
 // createTracesProcesor creates a trace processor based on this config.
 func createTracesProcessor(
 	ctx context.Context,
@@ -80,7 +91,8 @@ func createTracesProcessor(
 	)
 
 }
-
+{{- end}}
+{{- if eq . "log"}}
 func createLogsProcessor(
 	ctx context.Context,
 	set processor.CreateSettings,
@@ -101,3 +113,5 @@ func createLogsProcessor(
 	)
 
 }
+{{- end}}
+{{- end}}

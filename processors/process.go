@@ -7,20 +7,26 @@ import (
 )
 
 func GenerateProcessor(cfg config.ConfigStruct) []*template.Template {
+	templateSlice := []*template.Template{
+		configTemplate,
+		configTestTemplate,
+		factoryTemplate,
+		factoryTestTemplate,
+		goModTemplate,
+	}
 	for _, signal := range cfg.SetSignals() {
 
 		if signal == "metric" {
-			templateSlice = append(templateSlice, metricTemplate)
+			templateSlice = append(templateSlice, metricTemplate, metricTestTemplate)
 		}
 		if signal == "log" {
-			templateSlice = append(templateSlice, logTemplate)
+			templateSlice = append(templateSlice, logTemplate, logTestTemplate)
 		}
 		if signal == "trace" {
-			templateSlice = append(templateSlice, traceTemplate)
+			templateSlice = append(templateSlice, traceTemplate, traceTestTemplate)
 		}
 	}
-
-	cfg.Logger.Info("Processor templates generated", zap.String("exporter", cfg.Module))
+	cfg.Logger.Info("Processor templates generated", zap.String("processor", cfg.Module))
 
 	return templateSlice
 }

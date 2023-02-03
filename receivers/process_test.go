@@ -1,4 +1,4 @@
-package exporters
+package receivers
 
 import (
 	"github.com/Chinwendu20/otel_components_generator/config"
@@ -8,7 +8,7 @@ import (
 
 const lengthOfDefaultTemplate = 5
 
-func TestGenerateExporter(t *testing.T) {
+func TestGenerateReceiver(t *testing.T) {
 	cfg := config.NewConfig()
 	tests := []struct {
 		name                string
@@ -54,7 +54,7 @@ func TestGenerateExporter(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			cfg.Signals = tt.signals
-			templates := GenerateExporter(cfg)
+			templates := GenerateReceiver(cfg)
 			assert.Equal(t, len(templates), tt.diffExpectTemplates+lengthOfDefaultTemplate)
 		})
 	}

@@ -25,9 +25,17 @@ func NewFactory() receiver.Factory {
 		// component.StabilityLevelAlpha
 		// component.StabilityLevelBeta
 		// component.StabilityLevelStable
-		receiver.WithMetrics(createMetricsReceiver, component.StabilityLevelBeta),
-		// receiver.WithTraces(createTracesReceiver, component.StabilityLevelBeta),
-		// receiver.WithLogs(createLogsReceiver, component.StabilityLevelAlpha),
+        {{- range SplitString .Signals}}
+        {{- if eq . "trace"}}
+        receiver.WithTraces(createTracesReceiver, component.StabilityLevelBeta),
+        {{end}}
+        {{- if eq . "metric"}}
+        receiver.WithMetrics(createMetricsReceiver, component.StabilityLevelBeta),
+        {{end}}
+        {{- if eq . "log"}}
+        receiver.WithLogs(createLogsReceiver, component.StabilityLevelAlpha),
+        {{end}}
+        {{- end}}
 	)
 }
 
@@ -35,7 +43,8 @@ func createDefaultConfig() component.Config {
 
 	return &Config{}
 }
-
+{{- range SplitString .Signals}}
+{{- if eq . "metric"}}
 func createMetricsReceiver(
 	ctx context.Context,
 	set receiver.CreateSettings,
@@ -46,7 +55,8 @@ func createMetricsReceiver(
 	return receiver, err
 
 }
-
+{{- end}}
+{{- if eq . "trace"}}
 func createTracesReceiver(
 	ctx context.Context,
 	set receiver.CreateSettings,
@@ -57,7 +67,8 @@ func createTracesReceiver(
 	return receiver, err
 
 }
-
+{{- end}}
+{{- if eq . "log"}}
 func createLogsReceiver(
 	ctx context.Context,
 	set receiver.CreateSettings,
@@ -68,3 +79,5 @@ func createLogsReceiver(
 	return receiver, err
 
 }
+{{- end}}
+{{- end}}

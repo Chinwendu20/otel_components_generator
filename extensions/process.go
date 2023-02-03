@@ -8,7 +8,13 @@ import (
 
 func GenerateExtension(cfg config.ConfigStruct) []*template.Template {
 
-	cfg.Logger.Info("Extension templates generated", zap.String("exporter", cfg.Module))
+	cfg.Logger.Info("Extension templates generated", zap.String("extension", cfg.Module))
 
-	return templateSlice
+	return []*template.Template{
+		configTemplate,
+		configTestTemplate,
+		factoryTemplate,
+		factoryTestTemplate,
+		goModTemplate,
+	}
 }

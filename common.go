@@ -55,14 +55,14 @@ func processAndWrite(cfg config.ConfigStruct, tmpl *template.Template, outFile s
 
 func GetModules(cfg config.ConfigStruct) error {
 	if cfg.SkipGetModules {
-		cfg.Logger.Info("Generating source codes only, will not update go.mod and retrieve Go modules.")
+		cfg.Logger.Info("Generating source codes only, will not update go.mod.tmpl and retrieve Go modules.")
 		return nil
 	}
 
 	cmd := exec.Command(cfg.GoPath, "mod", "tidy")
 	cmd.Dir = cfg.Output
 	if out, err := cmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("failed to update go.mod: %w. Output:\n%s", err, out)
+		return fmt.Errorf("failed to update go.mod.tmpl: %w. Output:\n%s", err, out)
 	}
 
 	cfg.Logger.Info("Getting go modules")
