@@ -40,3 +40,4 @@ If you have a suggestion that would make this better, please fork the repo and c
 - Open a Pull Request
 
 
+**Please do not forget to give this project a star**
