@@ -21,12 +21,12 @@ func ProcessOutputPath(cfg config.ConfigStruct) error {
 	if _, err := os.Stat(cfg.Output); os.IsNotExist(err) {
 		cfg.Logger.Info("Output path not found, creating directory")
 		if err = os.Mkdir(cfg.Output, 0750); err != nil {
-			return fmt.Errorf("failed to create output path: %w", err)
+			return fmt.Errorf("failed to create output path: \n%w", err)
 		}
 	} else if err != nil {
 		return fmt.Errorf(" %w", err)
 	}
-	cfg.Logger.Info("Processed output path, created if missing")
+	cfg.Logger.Info("Processed output path")
 	return nil
 
 }
@@ -89,15 +89,18 @@ func obtainSourceCode(cfg config.ConfigStruct) error {
 
 	if cfg.Component == "exporter" {
 		templates = exporters.GenerateExporter(cfg)
-	}
-	if cfg.Component == "extension" {
+
+	} else if cfg.Component == "extension" {
 		templates = extensions.GenerateExtension(cfg)
-	}
-	if cfg.Component == "processor" {
+
+	} else if cfg.Component == "processor" {
 		templates = processors.GenerateProcessor(cfg)
-	}
-	if cfg.Component == "receiver" {
+
+	} else if cfg.Component == "receiver" {
 		templates = receivers.GenerateReceiver(cfg)
+
+	} else {
+		return errors.New("invalid value for component")
 	}
 	for _, tmpl := range templates {
 		if err := processAndWrite(cfg, tmpl, tmpl.Name(), cfg); err != nil {

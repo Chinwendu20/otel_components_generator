@@ -1,5 +1,6 @@
 package main
 
+import "C"
 import (
 	"flag"
 	"fmt"
@@ -14,34 +15,28 @@ const (
 	signalsFlag         = "signal"
 )
 
-var (
-	Config = config.NewConfig()
-)
-
-func flags() *flag.FlagSet {
+func flags(cfg *config.ConfigStruct) *flag.FlagSet {
 	flagSet := new(flag.FlagSet)
 
-	flagSet.StringVar(&Config.Component, componentTypeFlag, "", "The type of component to be generated")
-	flagSet.StringVar(&Config.Module, goModuleNameFlag, "", "The name of the GO module")
-	flagSet.StringVar(&Config.Output, outputDirectoryFlag, "", "The path to the directory for the generated source code")
-	flagSet.StringVar(&Config.Signals, signalsFlag, "", "This could be of value, metrics, traces or logs")
-	fmt.Printf("%v", Config)
+	flagSet.StringVar(&cfg.Component, componentTypeFlag, "", "The type of component to be generated")
+	flagSet.StringVar(&cfg.Module, goModuleNameFlag, "", "The name of the GO module")
+	flagSet.StringVar(&cfg.Output, outputDirectoryFlag, "", "The path to the directory for the generated source code")
+	flagSet.StringVar(&cfg.Signals, signalsFlag, "", "This could be of value, metrics, traces or logs")
 
 	return flagSet
 }
 
 func checkEmptyConfigOptions(cfg config.ConfigStruct) {
-	fmt.Println(Config.Component)
-	if Config.Component == "" {
+	if cfg.Component == "" {
 		obtainValueInteractively(componentTypeFlag, &Config.Component)
 	}
-	if Config.Module == "" {
+	if cfg.Module == "" {
 		obtainValueInteractively(goModuleNameFlag, &Config.Module)
 	}
-	if Config.Output == "" {
+	if cfg.Output == "" {
 		obtainValueInteractively(outputDirectoryFlag, &Config.Output)
 	}
-	if len(Config.Signals) == 0 && Config.Component != "extension" {
+	if len(cfg.Signals) == 0 && cfg.Component != "extension" {
 		obtainValueInteractively(signalsFlag, &Config.Signals)
 	}
 

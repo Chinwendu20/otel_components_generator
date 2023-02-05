@@ -49,7 +49,6 @@ func NewConfig() ConfigStruct {
 }
 
 func (cfg *ConfigStruct) ValidateSignal() error {
-	fmt.Println(cfg.Signals)
 	for _, sig := range cfg.SetSignals() {
 		valid := false
 		for _, signal := range validSignals {
@@ -70,7 +69,6 @@ func (cfg *ConfigStruct) ValidateSignal() error {
 }
 
 func (cfg *ConfigStruct) ValidateComponent() error {
-	fmt.Println(cfg.Component)
 
 	for _, component := range validComponents {
 

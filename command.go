@@ -12,7 +12,7 @@ var (
 
 // Command is the main entrypoint for this application
 func command(cfg config.ConfigStruct) (*cobra.Command, error) {
-	flagSet := flags()
+	flagSet := flags(&cfg)
 	cmd := &cobra.Command{
 		SilenceUsage:  true, // Don't print usage on Run error.
 		SilenceErrors: true, // Don't print errors; main does it.
@@ -25,7 +25,7 @@ ocg requests for these interactively.
 `,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			checkEmptyConfigOptions(cfg)
-			if err := validateComponent(Config); err != nil {
+			if err := validateComponent(cfg); err != nil {
 
 				return err
 			}

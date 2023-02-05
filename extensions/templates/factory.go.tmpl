@@ -1,4 +1,4 @@
-package project
+package {{.Module}}
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 
 const (
 	// typeStr is the type of the extension
-	typeStr = "project"
+	typeStr = {{.Module}}
 )
 
 // NewFactory creates a  extension factory

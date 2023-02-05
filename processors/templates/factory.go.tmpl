@@ -1,4 +1,4 @@
-package project
+package {{.Module}}
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 
 const (
 	// typeStr is the type of the processor
-	typeStr = "project"
+	typeStr = {{.Module}}
 )
 
 // NewFactory creates a processor factory
