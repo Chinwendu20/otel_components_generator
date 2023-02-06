@@ -27,16 +27,16 @@ Note:
 
 The component generator has different flags:
 
--component
+- component
 It is used to specify the type of componentto be generated. The following are the accepted values: exporter,processor,extension,receiver. Only one an be specified at a time.
 
--output
+- output
 It is used to indicate the location in which the generated source code would live in. The input should be string value.
 
--signal
+- signal
 It is used to indicate the signal(s) associated with a component. The accepted values are: trace,metric,log. More than one can be specified at a time but should be delimited with a comma and no whitespaces in between. e.g. --signal trace,metric.
 
--module
+- module
 It is used to indicate the name of the module to be generated
 
 ### How to contribute
