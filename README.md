@@ -6,28 +6,38 @@ OpenTelemetry is a collection of tools, APIs, and SDKs. Use it to instrument, ge
 
 You can download the binary [here](#). Place in your system's PATH environment variable. You can follow the tutorial [here](https://chlee.co/how-to-setup-environment-variables-for-windows-mac-and-linux/)
 
-### How it works
-
-The component generator has different flags:
-
--component
-It is used to specify the type of componentto be generated. The following are the accepted values: exporter,processor,extension,receiver. Only one an be specified at a time.
-
--output
-It is used to indicate the location in which the generated source code would live in. The input should be string value.
-
--signal
-It is used to indicate the signal(s) associated with a component. The accepted values are: trace,metric,log. More than one can be specified at a time but should be delimited with a comma and no whitespaces in between. e.g. --signal trace,metric.
-
--module
-It is used to indicate the name of the module to be generated
-
-Example usage:
+## Example usage:
 
 ```bash
 ocg --component exporter --output example --signal trace,log --module mycomponent
 ```
 Note: If any of the value is not supplied as a flag. It would be requested interactively.
+
+### Example usage without binary
+
+```bash
+go run . --component exporter --output example --signal trace,log --module mycomponent
+```
+Note:
+
+- If any of the value is not supplied as a flag. It would be requested interactively.
+- Ensure you ahave GO installed, if not, install [here](https://go.dev/dl/)
+
+### How it works
+
+The component generator has different flags:
+
+- component:
+It is used to specify the type of componentto be generated. The following are the accepted values: exporter,processor,extension,receiver. Only one an be specified at a time.
+
+- output:
+It is used to indicate the location in which the generated source code would live in. The input should be string value.
+
+- signal:
+It is used to indicate the signal(s) associated with a component. The accepted values are: trace,metric,log. More than one can be specified at a time but should be delimited with a comma and no whitespaces in between. e.g. --signal trace,metric.
+
+- module:
+It is used to indicate the name of the module to be generated
 
 ### How to contribute
 
