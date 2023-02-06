@@ -31,8 +31,9 @@ var (
 
 func parseTemplate(name string, bytes []byte) *template.Template {
 	return template.Must(template.New(name).Funcs(template.FuncMap{
-		"SplitString": func(signal string) []string {
-			return strings.Split(signal, ",")
+		"ObtainPackageName": func(module string) string {
+			return strings.Split(module, "/")[2]
+
 		},
 	}).Parse(string(bytes)))
 }

@@ -1,4 +1,4 @@
-package {{.Module}}
+package {{ObtainPackageName .Module}}
 
 import (
 	"context"
@@ -9,11 +9,11 @@ import (
 type trace struct {
 }
 
-func (comp *trace) traceStart(ctx context.Context, host component.Host) error {
+func (comp *trace)Start(ctx context.Context, host component.Host) error {
 	return nil
 
 }
 
-func (comp *trace) traceShutdown(ctx context.Context) error {
+func (comp *trace)Shutdown(ctx context.Context) error {
 	return nil
 }

@@ -8,8 +8,8 @@ import (
 )
 
 func TestFlags(t *testing.T) {
-
-	flgs := flags()
+	cfg := config.NewConfig()
+	flgs := flags(&cfg)
 	err := flgs.Parse([]string{"--component=exporter", "--module=pop", "--output=./pop", "--signal=trace"})
 	require.NoError(t, err)
 	assert.Equal(t, Config, config.ConfigStruct{

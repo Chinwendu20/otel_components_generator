@@ -1,4 +1,4 @@
-package {{.Module}}
+package {{ObtainPackageName .Module}}
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 
 const (
 	// typeStr is the type of the exporter
-	typeStr = {{.Module}}
+	typeStr = "{{ObtainPackageName .Module}}"
 )
 
 // NewFactory creates a Datadog exporter factory

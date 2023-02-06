@@ -1,4 +1,4 @@
-package {{.Module}}
+package {{ObtainPackageName .Module}}
 
 import (
 	"context"
@@ -9,11 +9,11 @@ import (
 type metric struct {
 }
 
-func (comp *metric) metricStart(ctx context.Context, host component.Host) error {
+func (comp *metric)Start(ctx context.Context, host component.Host) error {
 	return nil
 
 }
 
-func (comp *metric) metricShutdown(ctx context.Context) error {
+func (comp *metric)Shutdown(ctx context.Context) error {
 	return nil
 }

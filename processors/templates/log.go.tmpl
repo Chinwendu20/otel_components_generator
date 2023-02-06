@@ -1,13 +1,9 @@
-package {{.Module}}
+package {{ObtainPackageName .Module}}
 
 import (
 	"context"
 	"go.opentelemetry.io/collector/pdata/plog"
 )
-
-// You can change struct name
-type comp struct {
-}
 
 func processLogs(
 	ctx context.Context,

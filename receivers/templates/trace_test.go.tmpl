@@ -1,22 +1,22 @@
-package {{.Module}}
+package {{ObtainPackageName .Module}}
 
 import (
 	"context"
+	"go.opentelemetry.io/collector/component/componenttest"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.opentelemetry.io/collector/exporter/exportertest"
-	"go.opentelemetry.io/collector/pdata/ptrace"
+	"go.opentelemetry.io/collector/receiver/receivertest"
 )
 
-func TestTracesExporterNoErrors(t *testing.T) {
+func TestTracesReceiverNoErrors(t *testing.T) {
 	f := NewFactory()
-	lte, err := f.CreateTracesExporter(context.Background(), exportertest.NewNopCreateSettings(), f.CreateDefaultConfig())
-	require.NotNil(t, lte)
+	lle, err := f.CreateTracesReceiver(context.Background(), receivertest.NewNopCreateSettings(), f.CreateDefaultConfig(), nil)
+	require.NotNil(t, lle)
 	assert.NoError(t, err)
 
-	assert.NoError(t, lte.ConsumeTraces(context.Background(), ptrace.NewTraces()))
+	assert.NoError(t, lle.Start(context.Background(), componenttest.NewNopHost()))
 
-	assert.NoError(t, lte.Shutdown(context.Background()))
+	assert.NoError(t, lle.Shutdown(context.Background()))
 }

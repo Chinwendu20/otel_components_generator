@@ -8,6 +8,7 @@ import (
 	"github.com/Chinwendu20/otel_components_generator/extensions"
 	"github.com/Chinwendu20/otel_components_generator/processors"
 	"github.com/Chinwendu20/otel_components_generator/receivers"
+	"go.uber.org/multierr"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -59,13 +60,13 @@ func GetModules(cfg config.ConfigStruct) error {
 		return nil
 	}
 
+	cfg.Logger.Info("Getting go modules")
 	cmd := exec.Command(cfg.GoPath, "mod", "tidy")
 	cmd.Dir = cfg.Output
 	if out, err := cmd.CombinedOutput(); err != nil {
 		return fmt.Errorf("failed to update go.mod.tmpl: %w. Output:\n%s", err, out)
 	}
 
-	cfg.Logger.Info("Getting go modules")
 	// basic retry if error from go mod command (in case of transient network error). This could be improved
 	// retry 3 times with 5 second spacing interval
 	retries := 3
@@ -131,22 +132,25 @@ func generateComponent(cfg config.ConfigStruct) error {
 
 func validateComponent(cfg config.ConfigStruct) error {
 
+	var errorMessage []error
+
 	sigErr := cfg.ValidateSignal()
 	compErr := cfg.ValidateComponent()
+	modErr := cfg.ValidateModule()
 
-	if sigErr == nil && compErr == nil {
+	if sigErr == nil && compErr == nil && modErr == nil {
 
 		return nil
 
 	}
-	if sigErr == nil {
+	errors := []error{sigErr, compErr, modErr}
 
-		return compErr
+	for _, error := range errors {
+
+		if error != nil {
+			errorMessage = append(errorMessage, error)
+		}
 	}
-	if compErr == nil {
 
-		return sigErr
-	}
-
-	return fmt.Errorf("\n-- %w\n-- %v %s", sigErr, compErr, cfg.Signals)
+	return multierr.Combine(errorMessage...)
 }

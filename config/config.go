@@ -3,6 +3,8 @@ package config
 import (
 	"fmt"
 	"go.uber.org/zap"
+	"log"
+	"regexp"
 	"strings"
 )
 
@@ -10,7 +12,7 @@ const (
 	DefaultOtelColVersion = "0.69.1"
 	ConfigFileName        = "config.go"
 	FactoryFileName       = "factory.go"
-	GoModFileName         = "go.mod.tmpl"
+	GoModFileName         = "go.mod"
 	LogFileName           = "log.go"
 	TraceFileName         = "trace.go"
 	MetricFileName        = "metric.go"
@@ -24,7 +26,7 @@ const (
 var (
 	validSignals      = []string{"metric", "trace", "log"}
 	validComponents   = []string{"exporter", "receiver", "processor", "extension"}
-	validateSignalErr = fmt.Errorf("invalid input for signals flag, accepted values are: %v", validSignals)
+	validateSignalErr = fmt.Errorf("Invalid input for signals flag, accepted values are: %v", validSignals)
 )
 
 type ConfigStruct struct {
@@ -49,6 +51,10 @@ func NewConfig() ConfigStruct {
 }
 
 func (cfg *ConfigStruct) ValidateSignal() error {
+	if cfg.Component == "extension" {
+
+		return nil
+	}
 	for _, sig := range cfg.SetSignals() {
 		valid := false
 		for _, signal := range validSignals {
@@ -76,8 +82,25 @@ func (cfg *ConfigStruct) ValidateComponent() error {
 			return nil
 		}
 	}
-	return fmt.Errorf("invalid input for component flag, accepted values are: %v", validComponents)
+	return fmt.Errorf("Invalid input for component flag, accepted values are: %v", validComponents)
 
+}
+
+func (cfg *ConfigStruct) ValidateModule() error {
+
+	match, err := regexp.MatchString(`^github.com/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
+	if err == nil {
+		if match {
+
+			return nil
+
+		} else {
+
+			return fmt.Errorf("Invalid input for module flag, string must follow this pattern, github.com/<github username>/<package name>")
+		}
+	}
+	log.Fatal(err)
+	return err
 }
 
 func (cfg *ConfigStruct) SetSignals() []string {

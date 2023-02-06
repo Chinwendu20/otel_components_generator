@@ -1,4 +1,4 @@
-package {{.Module}}
+package {{ObtainPackageName .Module}}
 
 import (
 	"context"
@@ -9,7 +9,7 @@ import (
 
 const (
 	// typeStr is the type of the receiver
-	typeStr = {{.Module}}
+	typeStr = "{{ObtainPackageName .Module}}"
 )
 
 // NewFactory creates a receiver factory
@@ -52,7 +52,7 @@ func createMetricsReceiver(
 	nextConsumer consumer.Metrics,
 ) (receiver receiver.Metrics, err error) {
 
-	return receiver, err
+	return &metric{}, err
 
 }
 {{- end}}
@@ -61,10 +61,10 @@ func createTracesReceiver(
 	ctx context.Context,
 	set receiver.CreateSettings,
 	cfg component.Config,
-	nextConsumer consumer.Metrics,
-) (receiver receiver.Metrics, err error) {
+	nextConsumer consumer.Traces,
+) (receiver receiver.Traces, err error) {
 
-	return receiver, err
+	return &trace{}, err
 
 }
 {{- end}}
@@ -73,10 +73,10 @@ func createLogsReceiver(
 	ctx context.Context,
 	set receiver.CreateSettings,
 	cfg component.Config,
-	nextConsumer consumer.Metrics,
-) (receiver receiver.Metrics, err error) {
+	nextConsumer consumer.Logs,
+) (receiver receiver.Logs, err error) {
 
-	return receiver, err
+	return &log{}, err
 
 }
 {{- end}}

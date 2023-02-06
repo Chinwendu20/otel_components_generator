@@ -2,10 +2,11 @@ package main
 
 import "C"
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"github.com/Chinwendu20/otel_components_generator/config"
-	"log"
+	"strings"
 )
 
 const (
@@ -26,27 +27,25 @@ func flags(cfg *config.ConfigStruct) *flag.FlagSet {
 	return flagSet
 }
 
-func checkEmptyConfigOptions(cfg config.ConfigStruct) {
+func checkEmptyConfigOptions(cfg config.ConfigStruct) error {
+	var emptyValues []string
 	if cfg.Component == "" {
-		obtainValueInteractively(componentTypeFlag, &Config.Component)
+		emptyValues = append(emptyValues, fmt.Sprintf("- Value for %s required, please use the flag, --component\n", componentTypeFlag))
 	}
 	if cfg.Module == "" {
-		obtainValueInteractively(goModuleNameFlag, &Config.Module)
+		emptyValues = append(emptyValues, fmt.Sprintf("- Value for %s required, please use the flag, --module\n", goModuleNameFlag))
 	}
 	if cfg.Output == "" {
-		obtainValueInteractively(outputDirectoryFlag, &Config.Output)
+		emptyValues = append(emptyValues, fmt.Sprintf("- Value for %s required, please use the flag, --output\n", outputDirectoryFlag))
 	}
 	if len(cfg.Signals) == 0 && cfg.Component != "extension" {
-		obtainValueInteractively(signalsFlag, &Config.Signals)
+		emptyValues = append(emptyValues, fmt.Sprintf("- Value for %s required, please use the flag, --signal\n", signalsFlag))
+	}
+	if len(emptyValues) == 0 {
+		return nil
 	}
 
-}
-
-func obtainValueInteractively(value string, valstore *string) {
-	fmt.Printf("Input value for %s, no default setting:", value)
-	_, err := fmt.Scanln(valstore)
-	if err != nil {
-		log.Fatal(err)
-	}
+	emptyValues = append([]string{"\n"}, emptyValues...)
+	return errors.New(strings.Join(emptyValues, " "))
 
 }

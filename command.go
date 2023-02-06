@@ -17,14 +17,16 @@ func command(cfg config.ConfigStruct) (*cobra.Command, error) {
 		SilenceUsage:  true, // Don't print usage on Run error.
 		SilenceErrors: true, // Don't print errors; main does it.
 		Use:           "ocg",
-		Long: fmt.Sprintf("OpenTelemetry Collector Builder (%s)", version) + `
+		Long: fmt.Sprintf("OpenTelemetry Collector Generator (%s)", version) + `
 
 ocg generates a custom OpenTelemetry Collector binary using the
 options supplied by the commandline options. If no options are supplied
 ocg requests for these interactively.
 `,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			checkEmptyConfigOptions(cfg)
+			if err := checkEmptyConfigOptions(cfg); err != nil {
+				return err
+			}
 			if err := validateComponent(cfg); err != nil {
 
 				return err
