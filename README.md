@@ -6,6 +6,23 @@ OpenTelemetry is a collection of tools, APIs, and SDKs. Use it to instrument, ge
 
 You can download the binary [here](#). Place in your system's PATH environment variable. You can follow the tutorial [here](https://chlee.co/how-to-setup-environment-variables-for-windows-mac-and-linux/)
 
+## Example usage:
+
+```bash
+ocg --component exporter --output example --signal trace,log --module mycomponent
+```
+Note: If any of the value is not supplied as a flag. It would be requested interactively.
+
+### Example usage without binary
+
+```bash
+go run . --component exporter --output example --signal trace,log --module mycomponent
+```
+Note:
+
+- If any of the value is not supplied as a flag. It would be requested interactively.
+- Ensure you ahave GO installed, if not, install [here](https://go.dev/dl/)
+
 ### How it works
 
 The component generator has different flags:
@@ -21,13 +38,6 @@ It is used to indicate the signal(s) associated with a component. The accepted v
 
 -module
 It is used to indicate the name of the module to be generated
-
-Example usage:
-
-```bash
-ocg --component exporter --output example --signal trace,log --module mycomponent
-```
-Note: If any of the value is not supplied as a flag. It would be requested interactively.
 
 ### How to contribute
 
