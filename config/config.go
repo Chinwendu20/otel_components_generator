@@ -2,10 +2,11 @@ package config
 
 import (
 	"fmt"
-	"go.uber.org/zap"
 	"log"
 	"regexp"
 	"strings"
+
+	"go.uber.org/zap"
 )
 
 const (

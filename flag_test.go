@@ -1,10 +1,12 @@
 package main
 
 import (
-	"github.com/Chinwendu20/otel_components_generator/config"
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
+
+	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
 func TestFlags(t *testing.T) {

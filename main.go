@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/Chinwendu20/otel_components_generator/config"
 	"github.com/spf13/cobra"
+
+	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
 var (

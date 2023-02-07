@@ -1,9 +1,11 @@
 package receivers
 
 import (
-	"github.com/Chinwendu20/otel_components_generator/config"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+
+	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
 const lengthOfDefaultTemplate = 5

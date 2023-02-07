@@ -1,9 +1,11 @@
 package exporters
 
 import (
-	"github.com/Chinwendu20/otel_components_generator/config"
-	"go.uber.org/zap"
 	"text/template"
+
+	"go.uber.org/zap"
+
+	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
 func GenerateExporter(cfg config.ConfigStruct) []*template.Template {

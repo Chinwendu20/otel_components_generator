@@ -1,10 +1,12 @@
 package extensions
 
 import (
-	"github.com/Chinwendu20/otel_components_generator/config"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"text/template"
+
+	"github.com/stretchr/testify/assert"
+
+	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
 func TestGenerateExtension(t *testing.T) {

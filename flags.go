@@ -3,6 +3,7 @@ package main
 import "C"
 import (
 	"flag"
+
 	"github.com/Chinwendu20/otel_components_generator/config"
 )
 

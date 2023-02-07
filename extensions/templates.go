@@ -2,9 +2,10 @@ package extensions
 
 import (
 	_ "embed"
-	"github.com/Chinwendu20/otel_components_generator/config"
 	"strings"
 	"text/template"
+
+	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
 var (

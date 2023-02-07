@@ -2,14 +2,17 @@ package main
 
 import (
 	"errors"
-	"github.com/Chinwendu20/otel_components_generator/config"
-	"github.com/Chinwendu20/otel_components_generator/exporters"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+
+	"github.com/Chinwendu20/otel_components_generator/config"
+
+	"github.com/Chinwendu20/otel_components_generator/exporters"
 )
 
 func NewConfigFullOption() config.ConfigStruct {
@@ -243,6 +246,7 @@ func TestSetGoPathSkipGetModulesTrue(t *testing.T) {
 func TestSetGoPathSkipGetModulesFalse(t *testing.T) {
 	cfg := config.NewConfig()
 	err := SetGoPath(&cfg)
+	require.NoError(t, err)
 	path, err := exec.LookPath("go")
 	require.NoError(t, err)
 	assert.Equal(t, cfg.GoPath, path)
@@ -262,7 +266,8 @@ func TestProcessAndWrite(t *testing.T) {
 
 	testOutputFilePath := filepath.Join(cfg.Output, "test2")
 	testOutFile, _ := os.Create(filepath.Clean(testOutputFilePath))
-	template.Execute(testOutFile, cfg)
+	err = template.Execute(testOutFile, cfg)
+	require.NoError(t, err)
 	testOutFile.Close()
 
 	content, err := os.ReadFile(outputFilePath)

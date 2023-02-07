@@ -3,18 +3,24 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/Chinwendu20/otel_components_generator/config"
-	"github.com/Chinwendu20/otel_components_generator/exporters"
-	"github.com/Chinwendu20/otel_components_generator/extensions"
-	"github.com/Chinwendu20/otel_components_generator/processors"
-	"github.com/Chinwendu20/otel_components_generator/receivers"
-	"go.uber.org/multierr"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"text/template"
 	"time"
+
+	"go.uber.org/multierr"
+
+	"github.com/Chinwendu20/otel_components_generator/config"
+
+	"github.com/Chinwendu20/otel_components_generator/processors"
+
+	"github.com/Chinwendu20/otel_components_generator/exporters"
+
+	"github.com/Chinwendu20/otel_components_generator/receivers"
+
+	"github.com/Chinwendu20/otel_components_generator/extensions"
 
 	"go.uber.org/zap"
 )
