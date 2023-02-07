@@ -10,13 +10,13 @@ import (
 func TestFlags(t *testing.T) {
 	cfg := config.NewConfig()
 	flgs := flags(&cfg)
-	err := flgs.Parse([]string{"--component=exporter", "--module=pop", "--output=./pop", "--signal=trace"})
+	err := flgs.Parse([]string{"--component=exporter", "--module=github.com/user13/myexporter", "--signal=trace", "--output=./pop"})
 	require.NoError(t, err)
-	assert.Equal(t, Config, config.ConfigStruct{
-		Logger:         Config.Logger,
+	assert.Equal(t, cfg, config.ConfigStruct{
+		Logger:         cfg.Logger,
 		SkipGetModules: false,
 		Component:      "exporter",
-		Module:         "pop",
+		Module:         "github.com/user13/myexporter",
 		Output:         "./pop",
 		Signals:        "trace",
 	})

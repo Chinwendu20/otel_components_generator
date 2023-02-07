@@ -11,7 +11,7 @@ var (
 )
 
 // Command is the main entrypoint for this application
-func command(cfg config.ConfigStruct) (*cobra.Command, error) {
+func command(cfg config.ConfigStruct) *cobra.Command {
 	flagSet := flags(&cfg)
 	cmd := &cobra.Command{
 		SilenceUsage:  true, // Don't print usage on Run error.
@@ -20,8 +20,7 @@ func command(cfg config.ConfigStruct) (*cobra.Command, error) {
 		Long: fmt.Sprintf("OpenTelemetry Collector Generator (%s)", version) + `
 
 ocg generates a custom OpenTelemetry Collector binary using the
-options supplied by the commandline options. If no options are supplied
-ocg requests for these interactively.
+options supplied by the commandline options. 
 `,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := checkEmptyConfigOptions(cfg); err != nil {
@@ -36,5 +35,5 @@ ocg requests for these interactively.
 	}
 
 	cmd.Flags().AddGoFlagSet(flagSet)
-	return cmd, nil
+	return cmd
 }

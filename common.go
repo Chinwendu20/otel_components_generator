@@ -12,10 +12,18 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"text/template"
 	"time"
 
 	"go.uber.org/zap"
+)
+
+var (
+	EmptyComponentErrorMessage = fmt.Sprintf("- Value for %s required, please use the component flag, --component\n", componentTypeFlag)
+	EmptyModuleErrorMessage    = fmt.Sprintf("- Value for %s required, please use the module flag, --module\n", goModuleNameFlag)
+	EmptyOutputErrorMessage    = fmt.Sprintf("- Value for %s required, please use the output flag, --output\n", outputDirectoryFlag)
+	EmptySignalErrorMessage    = fmt.Sprintf("- Value for %s required, please use the signal flag, --signal\n", signalsFlag)
 )
 
 func ProcessOutputPath(cfg config.ConfigStruct) error {
@@ -153,4 +161,27 @@ func validateComponent(cfg config.ConfigStruct) error {
 	}
 
 	return multierr.Combine(errorMessage...)
+}
+
+func checkEmptyConfigOptions(cfg config.ConfigStruct) error {
+	var emptyValues []string
+	if cfg.Component == "" {
+		emptyValues = append(emptyValues, EmptyComponentErrorMessage)
+	}
+	if cfg.Module == "" {
+		emptyValues = append(emptyValues, EmptyModuleErrorMessage)
+	}
+	if cfg.Output == "" {
+		emptyValues = append(emptyValues, EmptyOutputErrorMessage)
+	}
+	if len(cfg.Signals) == 0 && cfg.Component != "extension" {
+		emptyValues = append(emptyValues, EmptySignalErrorMessage)
+	}
+	if len(emptyValues) == 0 {
+		return nil
+	}
+
+	emptyValues = append([]string{"\n"}, emptyValues...)
+	return errors.New(strings.Join(emptyValues, ""))
+
 }

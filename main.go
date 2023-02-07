@@ -10,7 +10,6 @@ var (
 )
 
 func main() {
-	cmd, err := command(Config)
-	cobra.CheckErr(err)
+	cmd := command(Config)
 	cobra.CheckErr(cmd.Execute())
 }
