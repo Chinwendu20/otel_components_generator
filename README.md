@@ -9,7 +9,7 @@ You can download the binary [here](#). Place in your system's PATH environment v
 ## Example usage:
 
 ```bash
-ocg --component exporter --output example --signal trace,log --module mycomponent
+ocg --component exporter --output example --signal trace,log --module github.com/user/package
 ```
 Note: If any of the value is not supplied as a flag. It would be requested interactively.
 
