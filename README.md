@@ -1,6 +1,6 @@
 # <img src="https://opentelemetry.io/img/logos/opentelemetry-logo-nav.png" alt="OpenTelemetry Icon" width="45" height=""> Otel Component generator
 
-OpenTelemetry is a collection of tools, APIs, and SDKs. Use it to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) to help analyze your software’s performance and behavior.  The OpenTelemetry Collector is a constituent of opentelemetry and  can collect data from OpenTelemetry SDKs and other sources. This project is a component generator for the OpenTelemetry collector. The Opentelemetry collector has various components like Extensions, Receivers, Exporters, and Processors. The aim of the project generate skeleto code of the various collector components.
+OpenTelemetry is a collection of tools, APIs, and SDKs. Use it to instrument, generate, collect, and export telemetry data (metrics, logs, and traces) to help analyze your software’s performance and behavior.  The OpenTelemetry Collector is a constituent of opentelemetry and  can collect data from OpenTelemetry SDKs and other sources. This project is a component generator for the OpenTelemetry collector. The Opentelemetry collector has various components like Extensions, Receivers, Exporters, and Processors. The aim of the project generate skeleton code of the various collector components.
 
 ### Installation
 
