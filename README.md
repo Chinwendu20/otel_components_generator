@@ -16,7 +16,7 @@ Note: If any of the value is not supplied as a flag. It would be requested inter
 ### Example usage without binary
 
 ```bash
-go run . --component exporter --output example --signal trace,log --module mycomponent
+go run . --component exporter --output example --signal trace,log --module github.com/user/package
 ```
 Note:
 
