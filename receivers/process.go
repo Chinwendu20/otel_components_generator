@@ -8,7 +8,7 @@ import (
 	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
-func GenerateReceiver(cfg config.ConfigStruct) []*template.Template {
+func GenerateReceiver(cfg config.Struct) []*template.Template {
 	templateSlice := []*template.Template{
 		configTemplate,
 		configTestTemplate,

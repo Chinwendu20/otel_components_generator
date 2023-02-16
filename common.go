@@ -32,7 +32,7 @@ var (
 	EmptySignalErrorMessage    = fmt.Sprintf("- Value for %s required, please use the signal flag, --signal\n", signalsFlag)
 )
 
-func ProcessOutputPath(cfg config.ConfigStruct) error {
+func ProcessOutputPath(cfg config.Struct) error {
 	if _, err := os.Stat(cfg.Output); os.IsNotExist(err) {
 		cfg.Logger.Info("Output path not found, creating directory")
 		if err = os.Mkdir(cfg.Output, 0750); err != nil {
@@ -46,7 +46,7 @@ func ProcessOutputPath(cfg config.ConfigStruct) error {
 
 }
 
-func SetGoPath(cfg *config.ConfigStruct) error {
+func SetGoPath(cfg *config.Struct) error {
 	if !cfg.SkipGetModules {
 		path, err := exec.LookPath("go")
 		if err != nil {
@@ -58,7 +58,7 @@ func SetGoPath(cfg *config.ConfigStruct) error {
 	return nil
 }
 
-func processAndWrite(cfg config.ConfigStruct, tmpl *template.Template, outFile string, tmplParams interface{}) error {
+func processAndWrite(cfg config.Struct, tmpl *template.Template, outFile string, tmplParams interface{}) error {
 	out, err := os.Create(filepath.Clean(filepath.Join(cfg.Output, outFile)))
 	if err != nil {
 		return err
@@ -68,7 +68,7 @@ func processAndWrite(cfg config.ConfigStruct, tmpl *template.Template, outFile s
 	return tmpl.Execute(out, tmplParams)
 }
 
-func GetModules(cfg config.ConfigStruct) error {
+func GetModules(cfg config.Struct) error {
 	if cfg.SkipGetModules {
 		cfg.Logger.Info("Generating source codes only, will not update go.mod.tmpl and retrieve Go modules.")
 		return nil
@@ -99,7 +99,7 @@ func GetModules(cfg config.ConfigStruct) error {
 	return fmt.Errorf("failed to download go modules: %s", failReason)
 }
 
-func obtainSourceCode(cfg config.ConfigStruct) error {
+func obtainSourceCode(cfg config.Struct) error {
 	var templates []*template.Template
 
 	if cfg.Component == "exporter" {
@@ -127,7 +127,7 @@ func obtainSourceCode(cfg config.ConfigStruct) error {
 	return nil
 }
 
-func generateComponent(cfg config.ConfigStruct) error {
+func generateComponent(cfg config.Struct) error {
 	if err := ProcessOutputPath(cfg); err != nil {
 		return err
 	}
@@ -144,7 +144,7 @@ func generateComponent(cfg config.ConfigStruct) error {
 
 }
 
-func validateComponent(cfg config.ConfigStruct) error {
+func validateComponent(cfg config.Struct) error {
 
 	var errorMessage []error
 
@@ -169,7 +169,7 @@ func validateComponent(cfg config.ConfigStruct) error {
 	return multierr.Combine(errorMessage...)
 }
 
-func checkEmptyConfigOptions(cfg config.ConfigStruct) error {
+func checkEmptyConfigOptions(cfg config.Struct) error {
 	var emptyValues []string
 	if cfg.Component == "" {
 		emptyValues = append(emptyValues, EmptyComponentErrorMessage)

@@ -14,7 +14,7 @@ func TestFlags(t *testing.T) {
 	flgs := flags(&cfg)
 	err := flgs.Parse([]string{"--component=exporter", "--module=github.com/user13/myexporter", "--signal=trace", "--output=./pop"})
 	require.NoError(t, err)
-	assert.Equal(t, cfg, config.ConfigStruct{
+	assert.Equal(t, cfg, config.Struct{
 		Logger:         cfg.Logger,
 		SkipGetModules: false,
 		Component:      "exporter",

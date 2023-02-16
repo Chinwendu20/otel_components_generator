@@ -8,7 +8,7 @@ import (
 	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
-func GenerateExtension(cfg config.ConfigStruct) []*template.Template {
+func GenerateExtension(cfg config.Struct) []*template.Template {
 
 	cfg.Logger.Info("Extension templates generated", zap.String("extension", cfg.Module))
 

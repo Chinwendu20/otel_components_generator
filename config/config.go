@@ -30,7 +30,7 @@ var (
 	validateSignalErr = fmt.Errorf("Invalid input for signals flag, accepted values are: %v", validSignals)
 )
 
-type ConfigStruct struct {
+type Struct struct {
 	Logger         *zap.Logger
 	SkipGetModules bool
 	Component      string
@@ -40,18 +40,18 @@ type ConfigStruct struct {
 	GoPath         string
 }
 
-func NewConfig() ConfigStruct {
+func NewConfig() Struct {
 	log, err := zap.NewDevelopment()
 	if err != nil {
 		panic(fmt.Sprintf("Experienced failure in obtaining logger instance: %v", err))
 	}
 
-	return ConfigStruct{
+	return Struct{
 		Logger: log,
 	}
 }
 
-func (cfg *ConfigStruct) ValidateSignal() error {
+func (cfg *Struct) ValidateSignal() error {
 	if cfg.Component == "extension" {
 
 		return nil
@@ -75,7 +75,7 @@ func (cfg *ConfigStruct) ValidateSignal() error {
 	return nil
 }
 
-func (cfg *ConfigStruct) ValidateComponent() error {
+func (cfg *Struct) ValidateComponent() error {
 
 	for _, component := range validComponents {
 
@@ -87,7 +87,7 @@ func (cfg *ConfigStruct) ValidateComponent() error {
 
 }
 
-func (cfg *ConfigStruct) ValidateModule() error {
+func (cfg *Struct) ValidateModule() error {
 
 	match, err := regexp.MatchString(`^github.com/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
 	if err == nil {
@@ -104,7 +104,7 @@ func (cfg *ConfigStruct) ValidateModule() error {
 	return err
 }
 
-func (cfg *ConfigStruct) SetSignals() []string {
+func (cfg *Struct) SetSignals() []string {
 
 	return strings.Split(cfg.Signals, ",")
 

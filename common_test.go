@@ -15,7 +15,7 @@ import (
 	"github.com/Chinwendu20/otel_components_generator/exporters"
 )
 
-func NewConfigFullOption() config.ConfigStruct {
+func NewConfigFullOption() config.Struct {
 	cfg := config.NewConfig()
 	cfg.Component = "exporter"
 	cfg.Output = "pop"
@@ -25,14 +25,14 @@ func NewConfigFullOption() config.ConfigStruct {
 	return cfg
 }
 
-func NewConfigEmptyComponent() config.ConfigStruct {
+func NewConfigEmptyComponent() config.Struct {
 	cfg := NewConfigFullOption()
 	cfg.Component = ""
 
 	return cfg
 
 }
-func NewConfigEmptySignal() config.ConfigStruct {
+func NewConfigEmptySignal() config.Struct {
 	cfg := NewConfigFullOption()
 	cfg.Signals = ""
 
@@ -40,60 +40,60 @@ func NewConfigEmptySignal() config.ConfigStruct {
 
 }
 
-func NewConfigEmptySignalExtension() config.ConfigStruct {
-	cfg := NewConfigFullOption()
-	cfg.Signals = ""
-	cfg.Component = "extension"
-
-	return cfg
-
-}
-
-func NewConfigEmptyModule() config.ConfigStruct {
-	cfg := NewConfigFullOption()
-	cfg.Module = ""
-
-	return cfg
-
-}
-
-func NewConfigEmptyOutput() config.ConfigStruct {
-	cfg := NewConfigFullOption()
-	cfg.Output = ""
-
-	return cfg
-
-}
-
-func NewConfigEmptyModuleAndOutput() config.ConfigStruct {
-	cfg := NewConfigFullOption()
-	cfg.Module = ""
-	cfg.Output = ""
-
-	return cfg
-
-}
-
-func NewConfigEmptySignalAndComponent() config.ConfigStruct {
-	cfg := NewConfigFullOption()
-	cfg.Signals = ""
-	cfg.Component = ""
-
-	return cfg
-
-}
-
-func NewConfigEmptySignalAndOutputExtension() config.ConfigStruct {
+func NewConfigEmptySignalExtension() config.Struct {
 	cfg := NewConfigFullOption()
 	cfg.Signals = ""
 	cfg.Component = "extension"
+
+	return cfg
+
+}
+
+func NewConfigEmptyModule() config.Struct {
+	cfg := NewConfigFullOption()
+	cfg.Module = ""
+
+	return cfg
+
+}
+
+func NewConfigEmptyOutput() config.Struct {
+	cfg := NewConfigFullOption()
 	cfg.Output = ""
 
 	return cfg
 
 }
 
-func NewConfigEmptyModuleAndComponent() config.ConfigStruct {
+func NewConfigEmptyModuleAndOutput() config.Struct {
+	cfg := NewConfigFullOption()
+	cfg.Module = ""
+	cfg.Output = ""
+
+	return cfg
+
+}
+
+func NewConfigEmptySignalAndComponent() config.Struct {
+	cfg := NewConfigFullOption()
+	cfg.Signals = ""
+	cfg.Component = ""
+
+	return cfg
+
+}
+
+func NewConfigEmptySignalAndOutputExtension() config.Struct {
+	cfg := NewConfigFullOption()
+	cfg.Signals = ""
+	cfg.Component = "extension"
+	cfg.Output = ""
+
+	return cfg
+
+}
+
+func NewConfigEmptyModuleAndComponent() config.Struct {
 	cfg := NewConfigFullOption()
 	cfg.Module = ""
 	cfg.Component = ""
@@ -102,7 +102,7 @@ func NewConfigEmptyModuleAndComponent() config.ConfigStruct {
 
 }
 
-func NewEmptyConfigComponentOutputModule() config.ConfigStruct {
+func NewEmptyConfigComponentOutputModule() config.Struct {
 	cfg := NewConfigFullOption()
 	cfg.Component = ""
 	cfg.Output = ""
@@ -112,7 +112,7 @@ func NewEmptyConfigComponentOutputModule() config.ConfigStruct {
 
 }
 
-func NewEmptyConfig() config.ConfigStruct {
+func NewEmptyConfig() config.Struct {
 
 	return config.NewConfig()
 
@@ -121,7 +121,7 @@ func NewEmptyConfig() config.ConfigStruct {
 func TestNewCommandEmptyConfigOptions(t *testing.T) {
 	tests := []struct {
 		name string
-		cfg  config.ConfigStruct
+		cfg  config.Struct
 		err  error
 	}{
 		{
@@ -208,7 +208,7 @@ func TestNewCommandEmptyConfigOptions(t *testing.T) {
 
 }
 
-func NewTestConfig() config.ConfigStruct {
+func NewTestConfig() config.Struct {
 	cfg := config.NewConfig()
 	cfg.Output = "temp"
 	cfg.Signals = "trace"

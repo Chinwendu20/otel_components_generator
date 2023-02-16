@@ -8,7 +8,7 @@ import (
 	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
-func GenerateExporter(cfg config.ConfigStruct) []*template.Template {
+func GenerateExporter(cfg config.Struct) []*template.Template {
 	templateSlice := []*template.Template{
 		configTemplate,
 		configTestTemplate,

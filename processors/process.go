@@ -8,7 +8,7 @@ import (
 	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
-func GenerateProcessor(cfg config.ConfigStruct) []*template.Template {
+func GenerateProcessor(cfg config.Struct) []*template.Template {
 	templateSlice := []*template.Template{
 		configTemplate,
 		configTestTemplate,

@@ -14,7 +14,7 @@ const (
 	signalsFlag         = "signal"
 )
 
-func flags(cfg *config.ConfigStruct) *flag.FlagSet {
+func flags(cfg *config.Struct) *flag.FlagSet {
 	flagSet := new(flag.FlagSet)
 
 	flagSet.StringVar(&cfg.Component, componentTypeFlag, "", "The type of component to be generated")

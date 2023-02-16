@@ -13,7 +13,7 @@ var (
 )
 
 // Command is the main entrypoint for this application
-func command(cfg config.ConfigStruct) *cobra.Command {
+func command(cfg config.Struct) *cobra.Command {
 	flagSet := flags(&cfg)
 	cmd := &cobra.Command{
 		SilenceUsage:  true, // Don't print usage on Run error.

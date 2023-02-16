@@ -9,7 +9,7 @@ import (
 
 func TestNewConfig(t *testing.T) {
 	cfg := NewConfig()
-	assert.Equal(t, cfg, ConfigStruct{Logger: cfg.Logger})
+	assert.Equal(t, cfg, Struct{Logger: cfg.Logger})
 
 }
 
