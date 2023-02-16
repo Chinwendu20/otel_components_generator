@@ -73,39 +73,13 @@ jobs:
             ~/go/bin
             ~/go/pkg/mod
           key: go-cache-${{ runner.os }}-${{ hashFiles('**/go.sum') }}
-      - name: checklicense
-        run: make checklicense
-      - name: misspell
-        run: make misspell
-      - name: checkdoc
-        run: make checkdoc
-      - name: go:porto
-        run: |
-          make goporto
-          git diff --exit-code || (echo 'Porto links are out of date, please run "make goporto" and commit the changes in this PR.' && exit 1)
-      - name: go:generate
-        run: |
-          make gogenerate
-          git diff --exit-code || (echo 'Generated code is out of date, please run "make gogenerate" and commit the changes in this PR.' && exit 1)
-      - name: Gen Pdata
-        run: |
-          make genpdata
-          git diff --exit-code || (echo 'Generated code is out of date, please run "make genpdata" and commit the changes in this PR.' && exit 1)
       - name: Gen dependabot
         run: |
           make gendependabot
           git diff -s --exit-code || (echo 'ALL_MODULES have been changed, please run "make gendependabot" and commit the changes in this PR.' && exit 1)
-      - name: Gen otelcorecol
-        run: |
-          make genotelcorecol
-          git diff -s --exit-code || (echo 'Generated code is out of date, please run "make genotelcorecol" and commit the changes in this PR.' && exit 1)
       - name: Multimod verify
         run: make multimod-verify
-      - name: crosslink
-        run: |
-          make crosslink
-          git diff -s --exit-code || (echo 'Replace statements are out of date, please run "make crosslink" and commit the changes in this PR.' && exit 1)
-
+ 
   unittest:
     strategy:
       matrix:
@@ -167,7 +141,7 @@ jobs:
           fail_ci_if_error: true
           verbose: true
 
-  cross-build-collector:
+  cross-build-ocg:
     needs: [setup-environment]
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -218,4 +192,4 @@ jobs:
           GOOS: ${{matrix.goos}}
           GOARCH: ${{matrix.goarch}}
         run: |
-          make otelcorecol
+          make ocg

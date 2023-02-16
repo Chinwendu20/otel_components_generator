@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 git config user.name opentelemetrybot
-git config user.email 107717825+opentelemetrybot@users.noreply.github.com
+git config user.email phil313+ocgbot@users.noreply.github.com
 
 PR_NAME=dependabot-prs/$(date +'%Y-%m-%dT%H%M%S')
 git checkout -b "$PR_NAME"
@@ -17,7 +17,7 @@ for line in $requests; do
     fi
 
     module=$(echo "$line" | cut -f 2 -d " ")
-    if [[ $module == go.opentelemetry.io/collector* ]]; then
+    if [[ $module == github.com/Chinwendu20/otel_components_generator* ]]; then
         continue
     fi
     version=$(echo "$line" | cut -f 6 -d " ")
@@ -33,7 +33,7 @@ for line in $requests; do
 done
 
 make gotidy
-make genotelcorecol
+make ocg
 
 git add --all
 git commit -m "dependabot updates $(date)

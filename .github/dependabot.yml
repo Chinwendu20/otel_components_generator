@@ -11,51 +11,15 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "gomod"
-    directory: "/cmd/builder"
+    directory: "/config"
     schedule:
       interval: "weekly"
   - package-ecosystem: "gomod"
-    directory: "/cmd/otelcorecol"
+    directory: "/exporters"
     schedule:
       interval: "weekly"
   - package-ecosystem: "gomod"
-    directory: "/component"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/confmap"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/connector/forwardconnector"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/consumer"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/exporter/loggingexporter"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/exporter/otlpexporter"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/exporter/otlphttpexporter"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/extension/ballastextension"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/extension/zpagesextension"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/featuregate"
+    directory: "/extensions"
     schedule:
       interval: "weekly"
   - package-ecosystem: "gomod"
@@ -63,22 +27,14 @@ updates:
     schedule:
       interval: "weekly"
   - package-ecosystem: "gomod"
-    directory: "/pdata"
+    directory: "/main"
     schedule:
       interval: "weekly"
   - package-ecosystem: "gomod"
-    directory: "/processor/batchprocessor"
+    directory: "/processors"
     schedule:
       interval: "weekly"
   - package-ecosystem: "gomod"
-    directory: "/processor/memorylimiterprocessor"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/receiver/otlpreceiver"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "gomod"
-    directory: "/semconv"
+    directory: "/receivers"
     schedule:
       interval: "weekly"

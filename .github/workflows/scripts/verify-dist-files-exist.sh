@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 files=(
-    bin/otelcol_darwin_amd64
-    bin/otelcol_darwin_arm64
-    bin/otelcol_linux_arm64
-    bin/otelcol_linux_ppc64le
-    bin/otelcol_linux_amd64
-    bin/otelcol_windows_amd64.exe
+    bin/ocg_darwin_amd64
+    bin/ocg_darwin_arm64
+    bin/ocg_linux_arm64
+    bin/ocg_linux_ppc64le
+    bin/ocg_linux_amd64
+    bin/ocg_windows_amd64.exe
 );
 for f in "${files[@]}"
 do

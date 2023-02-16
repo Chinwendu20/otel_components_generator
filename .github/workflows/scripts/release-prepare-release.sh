@@ -1,8 +1,8 @@
 #!/bin/bash -ex
 
 make chlog-update VERSION="v${CANDIDATE_STABLE}/v${CANDIDATE_BETA}"
-git config user.name opentelemetrybot
-git config user.email 107717825+opentelemetrybot@users.noreply.github.com
+git config user.name ocgbot
+git config user.email phil313+ocg@users.noreply.github.com
 BRANCH="prepare-release-prs/${CANDIDATE_BETA}-${CANDIDATE_STABLE}"
 git checkout -b "${BRANCH}"
 git add --all

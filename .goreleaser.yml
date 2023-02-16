@@ -1,0 +1,39 @@
+before:
+  hooks:
+    - go mod download
+monorepo:
+  tag_prefix: ocg
+  dir: main/
+builds:
+  - flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X github.com/Chinwendu20/otel_components_generator/main.version={{.Version}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+      - ppc64le
+    ignore:
+      - goos: windows
+        goarch: arm64
+    binary: ocg
+release:
+  github:
+    owner: Ononiwu Maureen Chiamaka
+    name: opentelemetry_component_generator
+  header: |
+    ### Images and binaries here: https://github.com/Chinwendu20/otel_components_generator_releases/releases/tag/{{ .Tag }}
+archives:
+  - format: binary
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  skip: true
