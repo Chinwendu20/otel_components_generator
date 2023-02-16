@@ -13,11 +13,8 @@ import (
 	"go.uber.org/multierr"
 
 	"github.com/Chinwendu20/otel_components_generator/config"
-
-	"github.com/Chinwendu20/otel_components_generator/processors"
-
 	"github.com/Chinwendu20/otel_components_generator/exporters"
-
+	"github.com/Chinwendu20/otel_components_generator/processors"
 	"github.com/Chinwendu20/otel_components_generator/receivers"
 
 	"github.com/Chinwendu20/otel_components_generator/extensions"
@@ -75,6 +72,8 @@ func GetModules(cfg config.Struct) error {
 	}
 
 	cfg.Logger.Info("Getting go modules")
+
+	// #nosec G204 -- cfg.Distribution.Go is trusted to be a safe path
 	cmd := exec.Command(cfg.GoPath, "mod", "tidy")
 	cmd.Dir = cfg.Output
 	if out, err := cmd.CombinedOutput(); err != nil {
@@ -86,6 +85,8 @@ func GetModules(cfg config.Struct) error {
 	retries := 3
 	failReason := "unknown"
 	for i := 1; i <= retries; i++ {
+
+		// #nosec G204 -- cfg.Distribution.Go is trusted to be a safe path
 		cmd := exec.Command(cfg.GoPath, "mod", "download")
 		cmd.Dir = cfg.Output
 		if out, err := cmd.CombinedOutput(); err != nil {
@@ -102,21 +103,20 @@ func GetModules(cfg config.Struct) error {
 func obtainSourceCode(cfg config.Struct) error {
 	var templates []*template.Template
 
-	if cfg.Component == "exporter" {
+	switch cfg.Component {
+	case "exporter":
 		templates = exporters.GenerateExporter(cfg)
-
-	} else if cfg.Component == "extension" {
+	case "extension":
 		templates = extensions.GenerateExtension(cfg)
-
-	} else if cfg.Component == "processor" {
+	case "processor":
 		templates = processors.GenerateProcessor(cfg)
-
-	} else if cfg.Component == "receiver" {
+	case "receiver":
 		templates = receivers.GenerateReceiver(cfg)
-
-	} else {
+	default:
 		return errors.New("invalid value for component")
+
 	}
+
 	for _, tmpl := range templates {
 		if err := processAndWrite(cfg, tmpl, tmpl.Name(), cfg); err != nil {
 			return fmt.Errorf("failed to generate source file %q: %w", tmpl.Name(), err)

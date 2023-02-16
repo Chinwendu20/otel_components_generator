@@ -202,7 +202,6 @@ func TestNewCommandEmptyConfigOptions(t *testing.T) {
 			err := checkEmptyConfigOptions(tt.cfg)
 			assert.Equal(t, err, tt.err)
 
-			//assert.Equal(t, err, tt.err)
 		})
 	}
 

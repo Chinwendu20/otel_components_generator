@@ -3,11 +3,11 @@ module github.com/Chinwendu20/otel_components_generator
 go 1.19
 
 replace (
-	github.com/Chinwendu20/otel_components_generator/config => ./config
-	github.com/Chinwendu20/otel_components_generator/exporters => ./exporters
-	github.com/Chinwendu20/otel_components_generator/extensions => ./extensions
-	github.com/Chinwendu20/otel_components_generator/processors => ./processors
-	github.com/Chinwendu20/otel_components_generator/receivers => ./receivers
+	github.com/Chinwendu20/otel_components_generator/config => ../config
+	github.com/Chinwendu20/otel_components_generator/exporters => ../exporters
+	github.com/Chinwendu20/otel_components_generator/extensions => ../extensions
+	github.com/Chinwendu20/otel_components_generator/processors => ../processors
+	github.com/Chinwendu20/otel_components_generator/receivers => ../receivers
 )
 
 require (
