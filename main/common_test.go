@@ -11,7 +11,6 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/Chinwendu20/otel_components_generator/config"
-
 	"github.com/Chinwendu20/otel_components_generator/exporters"
 )
 
