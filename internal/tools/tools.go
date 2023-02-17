@@ -13,4 +13,5 @@ import (
 	_ "go.opentelemetry.io/build-tools/checkdoc"
 	_ "go.opentelemetry.io/build-tools/chloggen"
 	_ "golang.org/x/tools/cmd/goimports"
+	_ "go.opentelemetry.io/build-tools/multimod"
 )

@@ -7,7 +7,7 @@ if [ "${EXISTING_ISSUE}" != "" ]; then
     exit 0
 fi
 
-gh issue create -a "${GITHUB_ACTOR}" --repo "${REPO}" --label release --title "Release v${CANDIDATE_BETA}/v${CANDIDATE_STABLE}" --body "Like #4522, but for v${CANDIDATE_BETA}/v${CANDIDATE_STABLE}
+gh issue create -a "${GITHUB_ACTOR}" --repo "${REPO}" --label release --title "Release v${CANDIDATE_BETA}/v${CANDIDATE_STABLE}" --body "Like #4522, but for v${CANDIDATE_BETA}/v${CANDIDATE_STABLE}"
 **Performed by ocg release manager**
 
 - [ ] Prepare stable  release v${CANDIDATE_STABLE}
