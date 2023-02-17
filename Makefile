@@ -91,5 +91,5 @@ gotest-with-cover: $(GOCOVMERGE)
 # Build the ocg executable.
 .PHONY: ocg
 ocg:
-	# pushd main/ && GO111MODULE=auto CGO_ENABLED=0 $(GOCMD) build -trimpath -o ../../bin/ocg_$(GOOS)_$(GOARCH) . && popd
+	# pushd main/ && GO111MODULE=auto $(GOCMD) build -trimpath -o ../../bin/ocg_$(GOOS)_$(GOARCH) . && popd
 	pushd main && $(GOCMD) build -trimpath -o ../../bin/ocg_$(GOOS)_$(GOARCH) && popd

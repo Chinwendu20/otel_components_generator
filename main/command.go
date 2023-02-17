@@ -8,9 +8,7 @@ import (
 	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
-var (
-	version = "dev"
-)
+
 
 // Command is the main entrypoint for this application
 func command(cfg config.Struct) *cobra.Command {
