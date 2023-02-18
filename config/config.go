@@ -89,7 +89,7 @@ func (cfg *Struct) ValidateComponent() error {
 
 func (cfg *Struct) ValidateModule() error {
 
-	match, err := regexp.MatchString(`^github.com/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
+	match, err := regexp.MatchString(`^github\.com/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
 	if err != nil {
 
 		log.Fatal(err)

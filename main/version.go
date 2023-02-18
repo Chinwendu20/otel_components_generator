@@ -8,7 +8,6 @@ import (
 
 var (
 	version = "dev"
-	date    = "unknown"
 )
 
 func versionCommand() *cobra.Command {
