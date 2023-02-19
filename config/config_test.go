@@ -28,7 +28,7 @@ func TestConfigStruct_ValidateSignal(t *testing.T) {
 		{
 			name:      "one valid signal, one invaid signal",
 			signals:   "trace,errsig",
-			ExpectErr: validateSignalErr,
+			ExpectErr: errValidateSignal,
 		},
 		{
 			name:      "three valid signals",
@@ -38,7 +38,7 @@ func TestConfigStruct_ValidateSignal(t *testing.T) {
 		{
 			name:      "one valid signal, two invalid signal",
 			signals:   "trace,errsig,errsig2",
-			ExpectErr: validateSignalErr,
+			ExpectErr: errValidateSignal,
 		},
 	}
 	for _, tt := range tests {

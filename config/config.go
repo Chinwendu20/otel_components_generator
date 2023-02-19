@@ -27,7 +27,7 @@ const (
 var (
 	validSignals      = []string{"metric", "trace", "log"}
 	validComponents   = []string{"exporter", "receiver", "processor", "extension"}
-	validateSignalErr = fmt.Errorf("Invalid input for signals flag, accepted values are: %v", validSignals)
+	errValidateSignal = fmt.Errorf("Invalid input for signals flag, accepted values are: %v", validSignals)
 )
 
 type Struct struct {
@@ -67,7 +67,7 @@ func (cfg *Struct) ValidateSignal() error {
 		}
 		if !valid {
 
-			return validateSignalErr
+			return errValidateSignal
 
 		}
 
@@ -89,19 +89,20 @@ func (cfg *Struct) ValidateComponent() error {
 
 func (cfg *Struct) ValidateModule() error {
 
-	match, err := regexp.MatchString(`^github.com/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
-	if err == nil {
-		if match {
+	match, err := regexp.MatchString(`^github\.com/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
+	if err != nil {
 
-			return nil
+		log.Fatal(err)
 
-		} else {
-
-			return fmt.Errorf("Invalid input for module flag, string must follow this pattern, github.com/<github username>/<package name>")
-		}
 	}
-	log.Fatal(err)
-	return err
+	if match {
+
+		return nil
+
+	}
+
+	return fmt.Errorf("Invalid input for module flag, string must follow this pattern, github.com/<github username>/<package name>")
+
 }
 
 func (cfg *Struct) SetSignals() []string {

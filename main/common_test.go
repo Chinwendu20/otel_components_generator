@@ -11,7 +11,6 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/Chinwendu20/otel_components_generator/config"
-
 	"github.com/Chinwendu20/otel_components_generator/exporters"
 )
 
@@ -202,7 +201,6 @@ func TestNewCommandEmptyConfigOptions(t *testing.T) {
 			err := checkEmptyConfigOptions(tt.cfg)
 			assert.Equal(t, err, tt.err)
 
-			//assert.Equal(t, err, tt.err)
 		})
 	}
 
