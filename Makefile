@@ -144,3 +144,7 @@ chlog-preview: $(CHLOG)
 .PHONY: chlog-update
 chlog-update: $(CHLOG)
 	$(CHLOG) update --version $(VERSION)
+
+.PHONY: gotidy
+gotidy:
+	@$(MAKE) for-all-target TARGET="tidy"
