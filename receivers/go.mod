@@ -6,7 +6,7 @@ replace github.com/Chinwendu20/otel_components_generator/config => ../config
 
 require (
 	github.com/Chinwendu20/otel_components_generator/config v0.0.0-00010101000000-000000000000
-	github.com/stretchr/testify v1.8.0
+	github.com/stretchr/testify v1.8.1
 	go.uber.org/zap v1.24.0
 )
 
