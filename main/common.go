@@ -27,6 +27,7 @@ var (
 	EmptySignalErrorMessage    = fmt.Sprintf("- Value for %s required, please use the signal flag, --signal\n", signalsFlag)
 )
 
+// ProcessOutputPath checks if the directory supplied in the output flag exists, if it doesen't, it creates it
 func ProcessOutputPath(cfg config.Struct) error {
 	if _, err := os.Stat(cfg.Output); os.IsNotExist(err) {
 		cfg.Logger.Info("Output path not found, creating directory")
@@ -41,6 +42,7 @@ func ProcessOutputPath(cfg config.Struct) error {
 
 }
 
+// SetGOPath function sets the path for the GO executable
 func SetGoPath(cfg *config.Struct) error {
 	if !cfg.SkipGetModules {
 		path, err := exec.LookPath("go")
@@ -53,6 +55,7 @@ func SetGoPath(cfg *config.Struct) error {
 	return nil
 }
 
+// processAndWrite creates file, supplied as the outfile arg and parses the template with the data object, tmplParams
 func processAndWrite(cfg config.Struct, tmpl *template.Template, outFile string, tmplParams interface{}) error {
 	out, err := os.Create(filepath.Clean(filepath.Join(cfg.Output, outFile)))
 	if err != nil {
@@ -63,6 +66,7 @@ func processAndWrite(cfg config.Struct, tmpl *template.Template, outFile string,
 	return tmpl.Execute(out, tmplParams)
 }
 
+// / GetModules function executes the "go mod tidy" command. It retries three times to download dependencies in cases of network latencies
 func GetModules(cfg config.Struct) error {
 	if cfg.SkipGetModules {
 		cfg.Logger.Info("Generating source codes only, will not update go.mod.tmpl and retrieve Go modules.")
@@ -98,6 +102,7 @@ func GetModules(cfg config.Struct) error {
 	return fmt.Errorf("failed to download go modules: %s", failReason)
 }
 
+// obtainSourceCode function generates templates for a particular type of component
 func obtainSourceCode(cfg config.Struct) error {
 	var templates []*template.Template
 
@@ -125,6 +130,10 @@ func obtainSourceCode(cfg config.Struct) error {
 	return nil
 }
 
+// This function generates a software component based on the provided configuration,
+// executing a series of steps including processing the output path, obtaining source code,
+// setting the Go path, and getting required modules.
+// It returns an error if any of the steps encounter an issue, or nil if the component is generated successfully.
 func generateComponent(cfg config.Struct) error {
 	if err := ProcessOutputPath(cfg); err != nil {
 		return err
@@ -142,6 +151,8 @@ func generateComponent(cfg config.Struct) error {
 
 }
 
+// The "validateComponent" function validates the input configuration signal, component, and module.
+// It returns nil if the configuration passes validation, or a combined error message if any field fails validation.
 func validateComponent(cfg config.Struct) error {
 
 	var errorMessage []error
@@ -167,6 +178,8 @@ func validateComponent(cfg config.Struct) error {
 	return multierr.Combine(errorMessage...)
 }
 
+// This function checks if any field in the configuration is empty.
+// It returns nil if all required fields have values, or an error message listing the empty fields if any of them are empty.
 func checkEmptyConfigOptions(cfg config.Struct) error {
 	var emptyValues []string
 	if cfg.Component == "" {
