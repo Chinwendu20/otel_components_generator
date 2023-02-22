@@ -9,14 +9,14 @@ You can download the binary [here](#). Place in your system's PATH environment v
 ## Example usage:
 
 ```bash
-ocg --component exporter --output example --signal trace,log --module github.com/user/package
+ocg --component exporter --output example --signal trace,log --module github.com/user/sample
 ```
 Note: If any of the value is not supplied as a flag. It would be requested interactively.
 
 ### Example usage without binary
 
 ```bash
-go run . --component exporter --output example --signal trace,log --module github.com/user/package
+go run . --component exporter --output example --signal trace,log --module github.com/user/sample
 ```
 Note:
 

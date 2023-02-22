@@ -51,6 +51,7 @@ func NewConfig() Struct {
 	}
 }
 
+// Validates signal matches value in validSignals slice
 func (cfg *Struct) ValidateSignal() error {
 	if cfg.Component == "extension" {
 
@@ -75,6 +76,7 @@ func (cfg *Struct) ValidateSignal() error {
 	return nil
 }
 
+// Validates component matches value in the validComponents slice
 func (cfg *Struct) ValidateComponent() error {
 
 	for _, component := range validComponents {
@@ -87,6 +89,7 @@ func (cfg *Struct) ValidateComponent() error {
 
 }
 
+// Validates input module matches the specified regex pattern
 func (cfg *Struct) ValidateModule() error {
 
 	match, err := regexp.MatchString(`^github\.com/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
@@ -105,6 +108,7 @@ func (cfg *Struct) ValidateModule() error {
 
 }
 
+// Converts signal from string to slice
 func (cfg *Struct) SetSignals() []string {
 
 	return strings.Split(cfg.Signals, ",")

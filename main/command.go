@@ -8,7 +8,7 @@ import (
 	"github.com/Chinwendu20/otel_components_generator/config"
 )
 
-// Command is the main entrypoint for this application
+// This returns a cobra command and it is the main entrypoint for this application
 func command(cfg config.Struct) *cobra.Command {
 	flagSet := flags(&cfg)
 	cmd := &cobra.Command{

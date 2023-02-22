@@ -13,6 +13,7 @@ const (
 	signalsFlag         = "signal"
 )
 
+// This function returns a flagset parsing command line flags based on the fields in the configuration struct.
 func flags(cfg *config.Struct) *flag.FlagSet {
 	flagSet := new(flag.FlagSet)
 
