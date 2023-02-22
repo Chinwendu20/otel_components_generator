@@ -8,7 +8,7 @@ You can download the binary [here](#). Place in your system's PATH environment v
 
 > Binary not released yet please refer to the [example usage without binary](### Example usage without binary)
 
-## Example usage:
+### Example usage:
 
 ```bash
 ocg --component exporter --output example --signal trace,log --module github.com/user/sample
