@@ -6,22 +6,30 @@ OpenTelemetry is a collection of tools, APIs, and SDKs used to instrument, gener
 
 You can download the binary [here](#). Place in your system's PATH environment variable. You can follow the tutorial [here](https://chlee.co/how-to-setup-environment-variables-for-windows-mac-and-linux/)
 
+> Binary not released yet please refer to the [example usage without binary](### Example usage without binary)
+
+```bash
+ocg --component exporter --output example --signal trace,log --module github.com/user/sample
+```
+
 ## Example usage:
 
 ```bash
 ocg --component exporter --output example --signal trace,log --module github.com/user/sample
 ```
-Note: If any of the value is not supplied as a flag. It would be requested interactively.
 
 ### Example usage without binary
-
+Note: Ensure you ahave GO installed, if not, install [here](https://go.dev/dl/)
+ 
 ```bash
+git clone github.com/Chinwendu20/otel_components_generator
+cd main
 go run . --component exporter --output example --signal trace,log --module github.com/user/sample
 ```
-Note:
+## Expected Output
 
-- If any of the value is not supplied as a flag. It would be requested interactively.
-- Ensure you ahave GO installed, if not, install [here](https://go.dev/dl/)
+![image](https://user-images.githubusercontent.com/59079323/220575176-67298b97-37a6-4e6b-b9f4-798cc42c9cbf.png)
+
 
 ### How it works
 
@@ -39,6 +47,12 @@ It is used to indicate the signal(s) associated with a component. The accepted v
 - module:
 It is used to indicate the name of the module to be generated
 
+- gopath
+Indicate the Go binary while executing Go commands. Default: go from the PATH"
+
+- skipGetModules
+Indicate if the generator should only generate code without calling 'go mod tidy' (default false)
+
 ### How to contribute
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue and let us know how we can make this project better. Don't forget to give the project a star! Thanks again!
@@ -48,6 +62,10 @@ If you have a suggestion that would make this better, please fork the repo and c
 - Commit your Changes (git commit -m 'Add some AmazingFeature')
 - Push to the Branch (git push origin feature/AmazingFeature)
 - Open a Pull Request
+
+### Acknowledgement.
+
+Conceptualizing this was heavily inspired by the work done in [opentelemetry collector builder](https://github.com/open-telemetry/opentelemetry-collector/tree/main/cmd/builder)
 
 
 **Please do not forget to give this project a star**
