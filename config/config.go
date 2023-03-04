@@ -92,7 +92,7 @@ func (cfg *Struct) ValidateComponent() error {
 // Validates input module matches the specified regex pattern
 func (cfg *Struct) ValidateModule() error {
 
-	match, err := regexp.MatchString(`^github\.com/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
+	match, err := regexp.MatchString(`^[a-z][\w\.]*/\w+/[A-Za-z]\w+[A-Za-z]$`, cfg.Module)
 	if err != nil {
 
 		log.Fatal(err)
@@ -104,7 +104,7 @@ func (cfg *Struct) ValidateModule() error {
 
 	}
 
-	return fmt.Errorf("Invalid input for module flag, string must follow this pattern, github.com/<github username>/<package name>")
+	return fmt.Errorf("invalid input for module flag, input is not a valid moduke name in golang")
 
 }
 
