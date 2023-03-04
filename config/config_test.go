@@ -113,15 +113,15 @@ func TestConfigStruct_ValidateModule(t *testing.T) {
 		},
 		{
 			module: "github.com/user13/8myextensions",
-			err:    fmt.Errorf("Invalid input for module flag, string must follow this pattern, github.com/<github username>/<package name>"),
+			err:    fmt.Errorf("invalid input for module flag, input is not a valid moduke name in golang"),
 		},
 		{
 			module: "github.com/user13/myextensions/",
-			err:    fmt.Errorf("Invalid input for module flag, string must follow this pattern, github.com/<github username>/<package name>"),
+			err:    fmt.Errorf("invalid input for module flag, input is not a valid moduke name in golang"),
 		},
 		{
 			module: "github.com/user13/e-xt",
-			err:    fmt.Errorf("Invalid input for module flag, string must follow this pattern, github.com/<github username>/<package name>"),
+			err:    fmt.Errorf("invalid input for module flag, input is not a valid moduke name in golang"),
 		},
 		{
 			module: "github.com/user13/my_extensions",
