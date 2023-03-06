@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/Chinwendu20/otel_components_generator/config v0.0.0-20230125175729-930d7a4197e6
-	github.com/stretchr/testify v1.8.1
+	github.com/stretchr/testify v1.8.2
 	go.uber.org/zap v1.24.0
 )
 
