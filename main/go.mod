@@ -18,7 +18,7 @@ require (
 	github.com/Chinwendu20/otel_components_generator/receivers v0.0.0-00010101000000-000000000000
 	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.1
-	go.uber.org/multierr v1.9.0
+	go.uber.org/multierr v1.11.0
 	go.uber.org/zap v1.24.0
 )
 
