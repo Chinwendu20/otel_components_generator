@@ -5,7 +5,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/Chinwendu20/otel_components_generator/config"
+	"github.com/tejas-contentstack/otel_components_generator/config"
 )
 
 var (

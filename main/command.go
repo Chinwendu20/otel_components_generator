@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/Chinwendu20/otel_components_generator/config"
+	"github.com/tejas-contentstack/otel_components_generator/config"
 )
 
 // This returns a cobra command and it is the main entrypoint for this application

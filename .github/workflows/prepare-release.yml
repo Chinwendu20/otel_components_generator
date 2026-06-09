@@ -34,17 +34,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CANDIDATE_BETA: ${{ inputs.candidate-beta }}
           CANDIDATE_STABLE: ${{ inputs.candidate-stable }}
-          REPO: Chinwendu20/otel_components_generator
+          REPO: tejas-contentstack/otel_components_generator
         run: ./.github/workflows/scripts/release-create-tracking-issue.sh
       - name: Check build status in repo
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: Chinwendu20/otel_components_generator
+          REPO: tejas-contentstack/otel_components_generator
         run: ./.github/workflows/scripts/release-check-build-status.sh
       - name: Prepare release for ocg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: Chinwendu20/otel_components_generator
+          REPO: tejas-contentstack/otel_components_generator
           CANDIDATE_BETA: ${{ inputs.candidate-beta }}
           CANDIDATE_STABLE: ${{ inputs.candidate-stable }}
           CURRENT_BETA: ${{ inputs.current-beta }}

@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/Chinwendu20/otel_components_generator/config"
+	"github.com/tejas-contentstack/otel_components_generator/config"
 )
 
 func TestFlags(t *testing.T) {

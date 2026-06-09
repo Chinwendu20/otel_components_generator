@@ -4,12 +4,12 @@ module-sets:
   stable:
     version:dev:
     modules:
-          - github/Chinwendu20/otel_components_generator/config
-          - github/Chinwendu20/otel_components_generator/exporters
-          - github/Chinwendu20/otel_components_generator/extensions
-          - github/Chinwendu20/otel_components_generator/main
-          - github/Chinwendu20/otel_components_generator/processors
-          - github/Chinwendu20/otel_components_generator/receivers
+          - github/tejas-contentstack/otel_components_generator/config
+          - github/tejas-contentstack/otel_components_generator/exporters
+          - github/tejas-contentstack/otel_components_generator/extensions
+          - github/tejas-contentstack/otel_components_generator/main
+          - github/tejas-contentstack/otel_components_generator/processors
+          - github/tejas-contentstack/otel_components_generator/receivers
 
 excluded-modules:
-          - github/Chinwendu20/otel_components_generator/internal/tools
+          - github/tejas-contentstack/otel_components_generator/internal/tools

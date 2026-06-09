@@ -5,7 +5,7 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/Chinwendu20/otel_components_generator/config"
+	"github.com/tejas-contentstack/otel_components_generator/config"
 )
 
 func GenerateReceiver(cfg config.Struct) []*template.Template {

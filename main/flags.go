@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/Chinwendu20/otel_components_generator/config"
+	"github.com/tejas-contentstack/otel_components_generator/config"
 )
 
 const (

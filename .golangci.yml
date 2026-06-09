@@ -84,7 +84,7 @@ linters-settings:
   goimports:
     # put imports beginning with prefix after 3rd-party packages;
     # it's a comma-separated list of prefixes
-    local-prefixes: github/Chinwendu20/otel_components_generator
+    local-prefixes: github/tejas-contentstack/otel_components_generator
 
   misspell:
     # Correct spellings using locale preferences for US or UK.

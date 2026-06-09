@@ -13,11 +13,11 @@ import (
 	"go.uber.org/multierr"
 	"go.uber.org/zap"
 
-	"github.com/Chinwendu20/otel_components_generator/config"
-	"github.com/Chinwendu20/otel_components_generator/exporters"
-	"github.com/Chinwendu20/otel_components_generator/extensions"
-	"github.com/Chinwendu20/otel_components_generator/processors"
-	"github.com/Chinwendu20/otel_components_generator/receivers"
+	"github.com/tejas-contentstack/otel_components_generator/config"
+	"github.com/tejas-contentstack/otel_components_generator/exporters"
+	"github.com/tejas-contentstack/otel_components_generator/extensions"
+	"github.com/tejas-contentstack/otel_components_generator/processors"
+	"github.com/tejas-contentstack/otel_components_generator/receivers"
 )
 
 var (

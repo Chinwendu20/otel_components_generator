@@ -18,7 +18,7 @@ ocg --component exporter --output example --signal trace,log --module github.com
 Note: Ensure you ahave GO installed, if not, install [here](https://go.dev/dl/)
  
 ```bash
-git clone github.com/Chinwendu20/otel_components_generator
+git clone github.com/tejas-contentstack/otel_components_generator
 cd main
 go run . --component exporter --output example --signal trace,log --module github.com/user/sample
 ```
